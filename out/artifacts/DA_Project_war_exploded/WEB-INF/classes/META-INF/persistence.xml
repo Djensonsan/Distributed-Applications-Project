@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="DAPersistenceUnit">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://da-server.mysql.database.azure.com:3306/da-database" />
+            <property name="javax.persistence.jdbc.user" value="daAdmin@da-server" />
+            <property name="javax.persistence.jdbc.password" value="AwesomeOracle!" />
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+            <property name="eclipselink.ddl-generation.output-mode" value="database" />
+        </properties>
+    </persistence-unit>
+</persistence>
