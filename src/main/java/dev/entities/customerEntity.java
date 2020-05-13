@@ -17,16 +17,22 @@ public class customerEntity {
     @Embedded
     private personEmbeddable person;
     @OneToMany
-    private List <orderEntity> orders;
+    private List <orderEntity> orders = new ArrayList<>();
 
     public customerEntity() {
     }
 
-    public customerEntity(addressEmbeddable address, personEmbeddable person, orderEntity order) {
+    public customerEntity(addressEmbeddable address, personEmbeddable person) {
         this.address = address;
         this.person = person;
-        this.orders = new ArrayList<>();
-        orders.add(order);
+    }
+
+    public List<orderEntity> getOrders() {
+        return orders;
+    }
+
+    public void addOrder(orderEntity order) {
+        this.orders.add(order);
     }
 
     public Long getCustomerId() {

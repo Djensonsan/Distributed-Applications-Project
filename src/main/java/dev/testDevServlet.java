@@ -22,5 +22,6 @@ public class testDevServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.customerBean.addCustomer();
         this.customerBean.addOrder();
+        this.customerBean.addOrdertoCustomer();
     }
 }

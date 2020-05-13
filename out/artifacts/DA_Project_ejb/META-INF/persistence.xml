@@ -5,8 +5,8 @@
          <jta-data-source>jdbc/mysql</jta-data-source>
         <class>testClasses.TestEntity</class>
         <properties>
-            <property name="javax.persistence.jdbc.urlL"
-                      value="jdbc:mysql://da-server.mysql.database.azure.com:3306/da-database"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://da-server.mysql.database.azure.com:3306/da_database"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
         </properties>
