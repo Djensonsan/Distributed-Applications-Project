@@ -1,6 +1,4 @@
-package tests;
-
-import tests.testBean;
+package testClasses;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "myServlet", urlPatterns = "/")
+@WebServlet(name = "myServlet", urlPatterns = "/test")
 public class testServlet extends HttpServlet {
 
     @EJB
-    private tests.testBean testBean;
+    private testBean testBean;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

@@ -1,4 +1,4 @@
-package tests;
+package testClasses;
 
 import javax.persistence.*;
 import java.util.Objects;
