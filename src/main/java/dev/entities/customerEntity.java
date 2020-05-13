@@ -4,6 +4,8 @@ import dev.embeddables.addressEmbeddable;
 import dev.embeddables.personEmbeddable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class customerEntity {
@@ -14,13 +16,17 @@ public class customerEntity {
     private addressEmbeddable address;
     @Embedded
     private personEmbeddable person;
+    @OneToMany
+    private List <orderEntity> orders;
 
     public customerEntity() {
     }
 
-    public customerEntity(addressEmbeddable address, personEmbeddable person) {
+    public customerEntity(addressEmbeddable address, personEmbeddable person, orderEntity order) {
         this.address = address;
         this.person = person;
+        this.orders = new ArrayList<>();
+        orders.add(order);
     }
 
     public Long getCustomerId() {
