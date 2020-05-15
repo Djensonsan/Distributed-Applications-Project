@@ -1,6 +1,6 @@
 package dev.enums;
 
-public enum statusEnum {
+public enum StatusEnum {
         AWAITING_CONFIRMATION,
         CONFIRMED,
         BEING_PROCESSED,

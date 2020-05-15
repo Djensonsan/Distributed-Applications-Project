@@ -3,7 +3,7 @@ package dev.embeddables;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class personEmbeddable {
+public class PersonEmbeddable {
     private String firstname;
     private String lastname;
     private String email;
@@ -11,10 +11,10 @@ public class personEmbeddable {
     private String salt;
     private String password;
 
-    public personEmbeddable() {
+    public PersonEmbeddable() {
     }
 
-    public personEmbeddable(String firstname, String lastname, String email, String phoneNumber, String salt, String password) {
+    public PersonEmbeddable(String firstname, String lastname, String email, String phoneNumber, String salt, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;

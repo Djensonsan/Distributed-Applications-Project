@@ -1,6 +1,7 @@
 package dev;
 
-import dev.beans.customerTestBean;
+import dev.beans.CustomerTestBean;
+import dev.entities.OrderEntity;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -9,12 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.Writer;
+import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(name = "testDevServlet",urlPatterns = "/dev")
-public class testDevServlet extends HttpServlet {
+public class TestDevServlet extends HttpServlet {
     @EJB
-    private customerTestBean customerBean;
+    private CustomerTestBean customerBean;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -24,5 +26,16 @@ public class testDevServlet extends HttpServlet {
         this.customerBean.addCustomer();
         this.customerBean.addOrder();
         this.customerBean.addOrdertoCustomer();
+
+        List<OrderEntity> orders = this.customerBean.getCustomerOrders(1L);
+        PrintWriter out = response.getWriter();
+
+        response.setContentType("text/html");
+        out.println("All orders of customer: 1");
+        out.println("<ul>");
+        for(OrderEntity o : orders) {
+            out.println("<li> Order status:"+o.getStatus()+"</li>");
+        }
+        out.println("</ul>");
     }
 }

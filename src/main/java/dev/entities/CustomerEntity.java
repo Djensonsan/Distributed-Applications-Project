@@ -1,37 +1,37 @@
 package dev.entities;
 
-import dev.embeddables.addressEmbeddable;
-import dev.embeddables.personEmbeddable;
+import dev.embeddables.AddressEmbeddable;
+import dev.embeddables.PersonEmbeddable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class customerEntity {
+public class CustomerEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
     // Address -> List of addresses
     @Embedded
-    private addressEmbeddable address;
+    private AddressEmbeddable address;
     @Embedded
-    private personEmbeddable person;
+    private PersonEmbeddable person;
     @OneToMany(cascade = CascadeType.ALL)
-    private List <orderEntity> orders = new ArrayList<>();
+    private List <OrderEntity> orders = new ArrayList<>();
 
-    public customerEntity() {
+    public CustomerEntity() {
     }
 
-    public customerEntity(addressEmbeddable address, personEmbeddable person) {
+    public CustomerEntity(AddressEmbeddable address, PersonEmbeddable person) {
         this.address = address;
         this.person = person;
     }
 
-    public List<orderEntity> getOrders() {
+    public List<OrderEntity> getOrders() {
         return orders;
     }
 
-    public void addOrder(orderEntity order) {
+    public void addOrder(OrderEntity order) {
         this.orders.add(order);
     }
 
@@ -43,19 +43,19 @@ public class customerEntity {
         this.customerId = customerId;
     }
 
-    public addressEmbeddable getAddress() {
+    public AddressEmbeddable getAddress() {
         return address;
     }
 
-    public void setAddress(addressEmbeddable address) {
+    public void setAddress(AddressEmbeddable address) {
         this.address = address;
     }
 
-    public personEmbeddable getPerson() {
+    public PersonEmbeddable getPerson() {
         return person;
     }
 
-    public void setPerson(personEmbeddable person) {
+    public void setPerson(PersonEmbeddable person) {
         this.person = person;
     }
 }

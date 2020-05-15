@@ -3,7 +3,7 @@ package dev.embeddables;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class addressEmbeddable {
+public class AddressEmbeddable {
     private String address1;
     private String address2;
     private String city;
@@ -11,10 +11,10 @@ public class addressEmbeddable {
     private int postalCode;
     private String country;
 
-    public addressEmbeddable() {
+    public AddressEmbeddable() {
     }
 
-    public addressEmbeddable(String address1, String address2, String city, String state, int postalCode, String country) {
+    public AddressEmbeddable(String address1, String address2, String city, String state, int postalCode, String country) {
         this.address1 = address1;
         this.address2 = address2;
         this.city = city;
