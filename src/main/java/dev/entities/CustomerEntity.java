@@ -18,7 +18,9 @@ public class CustomerEntity {
     @Embedded
     private PersonEmbeddable person;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Customers_Orders")
+    @JoinTable(name = "customers_orders",
+    joinColumns = @JoinColumn(name = "CUSTOMERID"),
+    inverseJoinColumns = @JoinColumn(name = "ORDERID") )
     private List <OrderEntity> orders = new ArrayList<>();
 
     public CustomerEntity() {

@@ -16,7 +16,9 @@ public class ItemEntity {
     private String quantityUnit;
     private float price;
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Items_Displays")
+    @JoinTable(name = "Items_Displays",
+            joinColumns = @JoinColumn(name = "ITEMID"),
+            inverseJoinColumns = @JoinColumn(name = "DISPLAYID") )
     private List<ItemDisplayEntity> itemDisplays = new ArrayList<>();
 
     public ItemEntity() {

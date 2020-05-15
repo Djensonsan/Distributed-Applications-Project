@@ -28,7 +28,9 @@ public class OrderEntity {
     private StatusEnum status;
     private String comment;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Orders_Itemorders")
+    @JoinTable(name = "Orders_Itemorders",
+            joinColumns = @JoinColumn(name = "ORDERID"),
+            inverseJoinColumns = @JoinColumn(name = "ORDERITEMID"))
     private List <OrderItemEntity> orderedItems = new ArrayList<>();
 
     public OrderEntity() {
