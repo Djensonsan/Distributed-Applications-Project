@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "Orders")
 public class OrderEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +28,7 @@ public class OrderEntity {
     private StatusEnum status;
     private String comment;
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Orders_Itemorders")
     private List <OrderItemEntity> orderedItems = new ArrayList<>();
 
     public OrderEntity() {

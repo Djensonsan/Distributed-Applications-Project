@@ -3,6 +3,7 @@ package dev.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "ItemOrders")
 public class OrderItemEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderItemId;

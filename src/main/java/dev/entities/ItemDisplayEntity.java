@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "Displays")
 public class ItemDisplayEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemDisplayId;

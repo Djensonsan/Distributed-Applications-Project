@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "Items")
 public class ItemEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
@@ -15,6 +16,7 @@ public class ItemEntity {
     private String quantityUnit;
     private float price;
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Items_Displays")
     private List<ItemDisplayEntity> itemDisplays = new ArrayList<>();
 
     public ItemEntity() {

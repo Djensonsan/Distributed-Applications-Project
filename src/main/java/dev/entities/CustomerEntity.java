@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "Customers")
 public class CustomerEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
@@ -17,6 +18,7 @@ public class CustomerEntity {
     @Embedded
     private PersonEmbeddable person;
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Customers_Orders")
     private List <OrderEntity> orders = new ArrayList<>();
 
     public CustomerEntity() {
