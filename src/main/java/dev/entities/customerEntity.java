@@ -16,7 +16,7 @@ public class customerEntity {
     private addressEmbeddable address;
     @Embedded
     private personEmbeddable person;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List <orderEntity> orders = new ArrayList<>();
 
     public customerEntity() {

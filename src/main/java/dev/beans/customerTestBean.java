@@ -24,7 +24,10 @@ public class customerTestBean {
         addressEmbeddable address = new addressEmbeddable("August Van Putlei", "117", "Borsbeek", "Antwerpen", 2150, "België");
         personEmbeddable person = new personEmbeddable("Jens", "Leysen", "jens.leysen@student.kuleuven.be","+32470508227","salt","password");
         customerEntity customer = new customerEntity(address, person);
+        Boolean persisted = em.contains(customer);
         em.persist(customer);
+        persisted = em.contains(customer);
+        em.flush();
     }
 
     // Persisted without customer linked to it
@@ -37,14 +40,17 @@ public class customerTestBean {
         statusEnum status = statusEnum.AWAITING_CONFIRMATION;
         String comment = "Verse groentjes aub!";
         orderEntity order = new orderEntity(address, orderDate, requiredDateStart, requiredDateEnd, deliveredDate, status, comment);
+        Boolean persisted = em.contains(order);
         em.persist(order);
+        persisted = em.contains(order);
+        em.flush();
     }
 
     // Get a customer and add an order to it
-    // Bug: 2nd customer and order are added
     public void addOrdertoCustomer(){
-        Query query = em.createNativeQuery("select * from da_database.customerentity where customerentity.CUSTOMERID = 1", customerEntity.class);
-        customerEntity customer = (customerEntity) query.getSingleResult();
+        customerEntity customer = em.find(customerEntity.class, 1L);
+
+        Boolean persisted = em.contains(customer);
 
         addressEmbeddable address = new addressEmbeddable("August Van Putlei", "117", "Borsbeek", "Antwerpen", 2150, "België");
         Date orderDate = new Date();
@@ -56,7 +62,6 @@ public class customerTestBean {
         orderEntity order = new orderEntity(address, orderDate, requiredDateStart, requiredDateEnd, deliveredDate, status, comment);
 
         customer.addOrder(order);
-        em.persist(order);
-        em.persist(customer);
+        em.flush();
     }
 }
