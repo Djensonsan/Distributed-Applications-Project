@@ -79,4 +79,12 @@ public class ItemEntity {
     public void setItemDisplays(List<ItemDisplayEntity> itemDisplays) {
         this.itemDisplays = itemDisplays;
     }
+
+    public String getQuantityUnit() {
+        return quantityUnit;
+    }
+
+    public void setQuantityUnit(String quantityUnit) {
+        this.quantityUnit = quantityUnit;
+    }
 }

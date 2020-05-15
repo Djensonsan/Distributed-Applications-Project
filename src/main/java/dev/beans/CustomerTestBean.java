@@ -2,10 +2,7 @@ package dev.beans;
 
 import dev.embeddables.AddressEmbeddable;
 import dev.embeddables.PersonEmbeddable;
-import dev.entities.CustomerEntity;
-import dev.entities.ItemEntity;
-import dev.entities.OrderEntity;
-import dev.entities.OrderItemEntity;
+import dev.entities.*;
 import dev.enums.StatusEnum;
 
 import javax.ejb.Stateless;
@@ -84,5 +81,17 @@ public class CustomerTestBean {
         CustomerEntity customer = em.find(CustomerEntity.class, customerId);
         List<OrderEntity> orders = customer.getOrders();
         return orders;
+    }
+
+    public void addCourier(){
+        PersonEmbeddable person = new PersonEmbeddable("August", "Martens", "august.martens@student.kuleuven.be","+324705648416","salt","password");
+        CourierEntity courier = new CourierEntity(person);
+        em.persist(courier);
+    }
+
+    public void addShop(){
+        AddressEmbeddable address = new AddressEmbeddable("Menegemlei", "10", "Deurne", "Antwerpen", 2140, "België");
+        ShopEntity shop = new ShopEntity("Bakkerij Janssens","janssens.Patisserie@gmail.com","+32470568787", address);
+        em.persist(shop);
     }
 }
