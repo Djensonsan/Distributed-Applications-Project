@@ -4,13 +4,14 @@ import dev.embeddables.AddressEmbeddable;
 import dev.enums.StatusEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "Orders")
-public class OrderEntity {
+public class OrderEntity implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;

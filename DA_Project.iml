@@ -9,22 +9,18 @@
         <webroots>
           <root url="file://$MODULE_DIR$/web" relative="/" />
         </webroots>
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/src" />
-        </sourceRoots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="ejb" name="EJB">
       <configuration>
-        <ejbRoots>
-          <root url="file://$MODULE_DIR$/src" />
-        </ejbRoots>
+        <ejbRoots />
       </configuration>
     </facet>
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="OpenJPA" />
+        <setting name="provider-name" value="EclipseLink" />
         <datasource-mapping>
           <factory-entry name="DAPersistenceUnit" value="64c43d03-69eb-45f6-ae27-abc05ce99bc9" />
           <factory-entry name="NewPersistenceUnit" />
@@ -41,6 +37,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/out/artifacts/DA_Project/WEB-INF/classes/beans" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/out/artifacts/DA_Project/WEB-INF/classes/beans" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -50,5 +48,10 @@
     <orderEntry type="library" name="JPA 2.0-2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" name="JAX-RS-2.1.1" level="project" />
+    <orderEntry type="library" name="JAX-RS-2.1.1" level="project" />
+    <orderEntry type="library" name="javax.json.bind-api-1.0" level="project" />
+    <orderEntry type="library" name="javax.json.processing-1.1.4" level="project" />
+    <orderEntry type="library" name="JAX-RS-2.1.1" level="project" />
   </component>
 </module>

@@ -4,12 +4,13 @@ import dev.embeddables.AddressEmbeddable;
 import dev.embeddables.PersonEmbeddable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "Customers")
-public class CustomerEntity {
+public class CustomerEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
     // Address -> List of addresses

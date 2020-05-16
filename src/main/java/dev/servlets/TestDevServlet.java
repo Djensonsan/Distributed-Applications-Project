@@ -1,4 +1,4 @@
-package dev;
+package dev.servlets;
 
 import dev.beans.CustomerTestBean;
 import dev.entities.OrderEntity;
