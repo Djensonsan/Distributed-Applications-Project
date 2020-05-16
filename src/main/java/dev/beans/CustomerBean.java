@@ -21,10 +21,19 @@ public class CustomerBean {
         return customer;
     }
 
-    public void addCustomer(){
-        AddressEmbeddable address = new AddressEmbeddable("August Van Putlei", "117", "Borsbeek", "Antwerpen", 2150, "België");
-        PersonEmbeddable person = new PersonEmbeddable("Jens", "Leysen", "jens.leysen@student.kuleuven.be","+32470508227","salt","password");
-        CustomerEntity customer = new CustomerEntity(address, person);
+    public void addCustomer(CustomerEntity customer){
         em.persist(customer);
+    }
+
+    public void deleteCustomer(Long customerId){
+        CustomerEntity customer = em.find(CustomerEntity.class, customerId);
+        em.remove(customer);
+    }
+
+    public void updateCustomer(CustomerEntity newCustomer){
+        Long customerId = newCustomer.getCustomerId();
+        CustomerEntity oldCustomer = em.find(CustomerEntity.class, customerId);
+        Boolean persisted = em.contains(oldCustomer);
+        oldCustomer = newCustomer;
     }
 }
