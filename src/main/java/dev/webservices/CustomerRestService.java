@@ -22,13 +22,6 @@ public class CustomerRestService {
     private CustomerBean customerBean;
 
     @GET
-    @Path("/test")
-    public Response getTest() {
-        String answer = "Get working!";
-        return Response.ok(answer, MediaType.APPLICATION_JSON).build();
-    }
-
-    @GET
     @Path("/get/{customerId}")
     public Response getCustomer(@PathParam("customerId") Long customerId) {
         CustomerEntity customer = customerBean.getCustomer(customerId);

@@ -33,7 +33,7 @@ public class CustomerBean {
     public void updateCustomer(CustomerEntity newCustomer){
         Long customerId = newCustomer.getCustomerId();
         CustomerEntity oldCustomer = em.find(CustomerEntity.class, customerId);
-        Boolean persisted = em.contains(oldCustomer);
-        oldCustomer = newCustomer;
+        oldCustomer.setAddress(newCustomer.getAddress());
+        oldCustomer.setPerson(newCustomer.getPerson());
     }
 }
