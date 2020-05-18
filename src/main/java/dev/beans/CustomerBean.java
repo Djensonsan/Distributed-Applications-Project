@@ -1,7 +1,5 @@
 package dev.beans;
 
-import dev.embeddables.AddressEmbeddable;
-import dev.embeddables.PersonEmbeddable;
 import dev.entities.CustomerEntity;
 
 import javax.ejb.Stateless;

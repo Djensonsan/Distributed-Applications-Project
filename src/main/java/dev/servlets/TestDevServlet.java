@@ -1,7 +1,9 @@
 package dev.servlets;
 
 import dev.beans.CustomerTestBean;
+import dev.beans.OrderBean;
 import dev.entities.OrderEntity;
+import org.jboss.weld.context.ejb.Ejb;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -17,6 +19,8 @@ import java.util.List;
 public class TestDevServlet extends HttpServlet {
     @EJB
     private CustomerTestBean customerBean;
+    @EJB
+    private OrderBean orderBean;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
