@@ -1,9 +1,10 @@
 package dev.embeddables;
 
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
-public class PersonEmbeddable {
+public class PersonEmbeddable implements Serializable {
     private String firstname;
     private String lastname;
     private String email;

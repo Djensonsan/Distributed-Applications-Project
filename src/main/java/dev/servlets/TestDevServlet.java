@@ -30,8 +30,8 @@ public class TestDevServlet extends HttpServlet {
         this.customerBean.addCustomer();
         this.customerBean.addOrder();
         this.customerBean.addOrdertoCustomer();
-        this.customerBean.addCourier();
-        this.customerBean.addShop();
+//        this.customerBean.addCourier();
+//        this.customerBean.addShop();
 
         List<OrderEntity> orders = this.customerBean.getCustomerOrders(1L);
         PrintWriter out = response.getWriter();

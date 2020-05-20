@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class testClient {
+
     public testClient() {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://");

@@ -11,6 +11,15 @@ public class OrderNotifierMDB implements MessageListener {
     }
 
     public void onMessage(Message message){
-        OrderEntity order = (OrderEntity) message;
+        ObjectMessage ObjectOrder = (ObjectMessage) message;
+        OrderEntity order;
+        try {
+            if(ObjectOrder.getObject() instanceof OrderEntity) {
+                order = (OrderEntity) ObjectOrder.getObject();
+                System.out.println("MDB received order: " + order.toString());
+            }
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
     }
 }

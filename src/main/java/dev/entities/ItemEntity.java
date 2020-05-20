@@ -1,12 +1,13 @@
 package dev.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "Items")
-public class ItemEntity {
+public class ItemEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
     private String name;

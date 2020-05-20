@@ -86,15 +86,15 @@ public class CustomerTestBean {
         return orders;
     }
 
-    public void addCourier(){
-        PersonEmbeddable person = new PersonEmbeddable("August", "Martens", "august.martens@student.kuleuven.be","+324705648416","salt","password");
-        CourierEntity courier = new CourierEntity(person);
-        em.persist(courier);
-    }
-
-    public void addShop(){
-        AddressEmbeddable address = new AddressEmbeddable("Menegemlei", "10", "Deurne", "Antwerpen", 2140, "België");
-        ShopEntity shop = new ShopEntity("Bakkerij Janssens","janssens.Patisserie@gmail.com","+32470568787", address);
-        em.persist(shop);
-    }
+//    public void addCourier(){
+//        PersonEmbeddable person = new PersonEmbeddable("August", "Martens", "august.martens@student.kuleuven.be","+324705648416","salt","password");
+//        CourierEntity courier = new CourierEntity(person);
+//        em.persist(courier);
+//    }
+//
+//    public void addShop(){
+//        AddressEmbeddable address = new AddressEmbeddable("Menegemlei", "10", "Deurne", "Antwerpen", 2140, "België");
+//        ShopEntity shop = new ShopEntity("Bakkerij Janssens","janssens.Patisserie@gmail.com","+32470568787", address);
+//        em.persist(shop);
+//    }
 }

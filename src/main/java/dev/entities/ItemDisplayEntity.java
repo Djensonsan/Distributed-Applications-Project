@@ -1,12 +1,13 @@
 package dev.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "Displays")
-public class ItemDisplayEntity {
+public class ItemDisplayEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemDisplayId;
     private String imagePath;

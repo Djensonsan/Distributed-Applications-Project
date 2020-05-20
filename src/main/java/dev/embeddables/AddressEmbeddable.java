@@ -1,9 +1,10 @@
 package dev.embeddables;
 
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
-public class AddressEmbeddable {
+public class AddressEmbeddable implements Serializable {
     private String address1;
     private String address2;
     private String city;

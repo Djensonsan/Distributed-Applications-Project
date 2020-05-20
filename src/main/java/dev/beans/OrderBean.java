@@ -48,6 +48,7 @@ public class OrderBean {
         CustomerEntity customer = em.find(CustomerEntity.class, customerId);
         customer.addOrder(order);
         produceOrderMessage(order);
+        System.out.println("Order bean is saying: "+order.toString());
     }
 
     public void produceOrderMessage(OrderEntity order) throws NamingException, JMSException {

@@ -1,10 +1,11 @@
 package dev.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "ItemOrders")
-public class OrderItemEntity {
+public class OrderItemEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderItemId;
     private int quantity;
