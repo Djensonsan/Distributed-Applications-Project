@@ -25,6 +25,9 @@ public class CustomerRestService {
     @Path("/get/{customerId}")
     public Response getCustomer(@PathParam("customerId") Long customerId) {
         CustomerEntity customer = customerBean.getCustomer(customerId);
+        if (customer == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         return Response.ok(customer, MediaType.APPLICATION_JSON).build();
     }
 
