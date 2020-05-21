@@ -40,7 +40,7 @@ public class CustomerRestService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response postCustomer(CustomerEntity customer) {
         if (customer == null) {
-            throw new BadRequestException();
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
         CustomerEntity persistedCustomer = customerBean.addCustomer(customer);
         return Response.ok(persistedCustomer, MediaType.APPLICATION_JSON).build();
@@ -50,8 +50,8 @@ public class CustomerRestService {
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateCustomer(CustomerEntity customer) {
-        if (customer == null) {
-            throw new BadRequestException();
+        if (customer == null || customer.getCustomerId() == null) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
         try {
             CustomerEntity persistedCustomer = customerBean.updateCustomer(customer);
