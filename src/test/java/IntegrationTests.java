@@ -14,6 +14,6 @@ public class IntegrationTests {
     @Test
     public void shouldNotFindCustomer(){
         Response response = target.path("customer").request("99999999").get();
-        assertEquals(Response.Status.NOT_FOUND, response.getStatusInfo());
+        assertEquals(Response.Status.NOT_FOUND, response.getStatusInfo().toEnum());
     }
 }
