@@ -16,7 +16,6 @@ import static org.junit.Assert.assertTrue;
 public class IntegrationTests {
     Client client = ClientBuilder.newClient();
     WebTarget target = client.target("http://localhost:8080/DA_Project/");
-    Long customerId;
 
     @Test
     public void shouldNotFindCustomer(){

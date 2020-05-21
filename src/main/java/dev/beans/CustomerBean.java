@@ -6,7 +6,6 @@ import dev.entities.CustomerEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.BadRequestException;
 
 @Stateless(name = "customerEJB")
 public class CustomerBean {
@@ -31,7 +30,7 @@ public class CustomerBean {
         return customer;
     }
 
-    public CustomerEntity updateCustomer(CustomerEntity newCustomer) throws CustomerNotFoundException,BadRequestException {
+    public CustomerEntity updateCustomer(CustomerEntity newCustomer) throws CustomerNotFoundException {
         Long customerId = newCustomer.getCustomerId();
         CustomerEntity oldCustomer = em.find(CustomerEntity.class, customerId);
         if(oldCustomer == null){

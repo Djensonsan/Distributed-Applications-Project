@@ -5,10 +5,7 @@ import dev.embeddables.PersonEmbeddable;
 import dev.entities.*;
 import dev.enums.StatusEnum;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.jms.JMSException;
-import javax.naming.NamingException;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
