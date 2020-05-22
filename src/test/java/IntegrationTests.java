@@ -1,6 +1,7 @@
 import dev.embeddables.AddressEmbeddable;
 import dev.embeddables.PersonEmbeddable;
 import dev.entities.CustomerEntity;
+import dev.entities.OrderEntity;
 import org.junit.Test;
 
 import javax.ws.rs.client.Client;
@@ -81,5 +82,32 @@ public class IntegrationTests {
         // Get deleted customer
         response = target.path("customer/get/"+customerId.toString()).request(MediaType.APPLICATION_JSON).get();
         assertEquals(Response.Status.NOT_FOUND, response.getStatusInfo().toEnum());
+    }
+
+    @Test
+    public void updateOrderNotFound(){
+        OrderEntity order = new OrderEntity();
+        order.setOrderId(9999999L);
+        Response response = target.path("order/update").request().buildPut(Entity.entity(order, MediaType.APPLICATION_JSON)).invoke();
+        assertEquals(Response.Status.NOT_FOUND, response.getStatusInfo().toEnum());
+    }
+
+    @Test
+    public void getOrderNotFound(){
+        Response response = target.path("order/get/9999999").request(MediaType.APPLICATION_JSON).get();
+        assertEquals(Response.Status.NOT_FOUND, response.getStatusInfo().toEnum());
+    }
+
+    @Test
+    public void deleteOrderNotFound(){
+        Response response = target.path("order/delete/9999999").request().delete();
+        assertEquals(Response.Status.NOT_FOUND, response.getStatusInfo().toEnum());
+    }
+
+    @Test
+    public void updateOrderBadRequest(){
+        OrderEntity order = new OrderEntity();
+        Response response = target.path("order/update").request().buildPut(Entity.entity(order, MediaType.APPLICATION_JSON)).invoke();
+        assertEquals(Response.Status.BAD_REQUEST, response.getStatusInfo().toEnum());
     }
 }

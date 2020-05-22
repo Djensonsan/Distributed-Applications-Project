@@ -1,5 +1,7 @@
 package dev.beans;
 
+import dev.customExceptions.CustomerNotFoundException;
+import dev.customExceptions.OrderNotFoundException;
 import dev.entities.CustomerEntity;
 import dev.entities.OrderEntity;
 
@@ -10,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.Order;
 
 @Stateless(name = "orderEJB")
 public class OrderBean {
@@ -20,19 +23,20 @@ public class OrderBean {
     public OrderBean() {
     }
 
-    public OrderEntity getOrder(Long orderId){
+    public OrderEntity getOrder(Long orderId) throws OrderNotFoundException {
         OrderEntity order = em.find(OrderEntity.class, orderId);
+        if (order == null){
+            throw new OrderNotFoundException();
+        }
         return order;
     }
 
-    public void deleteOrder(Long orderId){
-        OrderEntity order = em.find(OrderEntity.class, orderId);
-        em.remove(order);
-    }
-
-    public void updateOrder(OrderEntity newOrder) throws JMSException, NamingException {
+    public OrderEntity updateOrder(OrderEntity newOrder) throws OrderNotFoundException, JMSException, NamingException {
         Long orderId = newOrder.getOrderId();
         OrderEntity oldOrder = em.find(OrderEntity.class, orderId);
+        if(oldOrder == null){
+            throw new OrderNotFoundException();
+        }
         oldOrder.setAddress(newOrder.getAddress());
         oldOrder.setComment(newOrder.getComment());
         oldOrder.setDeliveredDate(newOrder.getDeliveredDate());
@@ -42,13 +46,25 @@ public class OrderBean {
         oldOrder.setRequiredDateStart(newOrder.getRequiredDateStart());
         oldOrder.setOrderDate(newOrder.getOrderDate());
         produceOrderMessage(oldOrder);
+        return oldOrder;
     }
 
-    public void addOrderToCustomer(OrderEntity order, Long customerId) throws JMSException, NamingException {
+    public OrderEntity addOrderToCustomer(OrderEntity order, Long customerId) throws CustomerNotFoundException, JMSException, NamingException {
         CustomerEntity customer = em.find(CustomerEntity.class, customerId);
+        if(customer == null){
+            throw new CustomerNotFoundException();
+        }
         customer.addOrder(order);
         produceOrderMessage(order);
-        System.out.println("Order bean is saying: "+order.toString());
+        return order;
+    }
+
+    public void deleteOrder(Long orderId) throws OrderNotFoundException {
+        OrderEntity order = em.find(OrderEntity.class, orderId);
+        if (order == null){
+            throw new OrderNotFoundException();
+        }
+        em.remove(order);
     }
 
     public void produceOrderMessage(OrderEntity order) throws NamingException, JMSException {
