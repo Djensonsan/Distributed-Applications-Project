@@ -3,8 +3,6 @@ package dev.messaging;
 import dev.entities.CustomerEntity;
 import dev.entities.OrderEntity;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.mail.Message;
@@ -13,7 +11,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
 
 @Stateless
 public class EmailSessionBean {
@@ -31,8 +28,8 @@ public class EmailSessionBean {
             MimeBodyPart mailMessage = new MimeBodyPart();
 
             mailMessage.setContent(
-                    "Dear customer, thank you for using Grocy! <br /> <br />  We have received your order and will start working on it soon. <br /> Your order will be delivered to: "+order.getAddress().getAddress1()+", "+order
-                            .getAddress().getAddress2()+"<br /> You will receive your order before: "+order.getRequiredDateEnd()+"<br /> <br />  For any updates on your order, please visit our website Grocy.be. <br /> Have a nice day! - Grocy Team", "text/html; charset=utf-8");
+                    "Dear "+customer.getPerson().getFirstname()+", thank you for using Grocy! <br /> <br />  We have received your order and will start working on it soon. <br /> Your order will be delivered to: "+order.getAddress().getAddress1()+", "+order
+                            .getAddress().getAddress2()+", "+order.getAddress().getCity()+"<br /> You will receive your order before: "+order.getRequiredDateEnd()+"<br /> <br />  For any updates on your order, please visit our website Grocy.be. <br /> <br /> Have a nice day! <br /> - Grocy Team", "text/html; charset=utf-8");
 
             mailContent.addBodyPart(mailMessage);
             simpleMail.setContent(mailContent);
@@ -41,6 +38,5 @@ public class EmailSessionBean {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
     }
 }
