@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.Order;
 
 @Stateless(name = "orderEJB")
@@ -55,6 +56,8 @@ public class OrderBean {
             throw new CustomerNotFoundException();
         }
         customer.addOrder(order);
+        em.flush();
+        em.refresh(order);
         produceOrderMessage(order);
         return order;
     }
