@@ -5,15 +5,13 @@ import dev.customExceptions.OrderNotFoundException;
 import dev.entities.CustomerEntity;
 import dev.entities.OrderEntity;
 
-import javax.ejb.Stateless;
+import javax.ejb.*;
 import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.criteria.Order;
 
 @Stateless(name = "orderEJB")
 public class OrderBean {
