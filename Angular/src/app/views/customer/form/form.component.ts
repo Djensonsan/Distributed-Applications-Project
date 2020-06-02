@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Customer} from '../interfaces/customer';
-import {PostService} from '../services/post.service';
+import {Customer} from '../../../interfaces/customer';
+import {PostService} from '../../../services/post.service';
 
 
 @Component({
