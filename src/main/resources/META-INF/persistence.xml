@@ -3,7 +3,7 @@
 
     <persistence-unit name="DAPersistenceUnit">
          <jta-data-source>jdbc/mysql</jta-data-source>
-        <class>testClasses.TestEntity</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:mysql://da-server.mysql.database.azure.com:3306/da_database"/>

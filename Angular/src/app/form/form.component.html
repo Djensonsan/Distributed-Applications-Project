@@ -1,0 +1,71 @@
+<div class="card mt-2 mb-2">
+  <div class="card-header bg-primary text-light">
+    Add a customer
+  </div>
+  <div class="card-body">
+    <form #userForm="ngForm" (ngSubmit)="OnSave(userForm)">
+      <div ngModelGroup="person">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail">Email</label>
+            <input class="form-control" id="inputEmail" name="email" ngModel placeholder="Email" type="email">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword">Password</label>
+            <input class="form-control" id="inputPassword" name="password" ngModel placeholder="Password"
+                   type="password">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputFirstName">First Name</label>
+            <input class="form-control" id="inputFirstName" name="firstname" ngModel placeholder="First Name"
+                   type="text">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputLastName">Last Name</label>
+            <input class="form-control" id="inputLastName" name="lastname" ngModel placeholder="Last Name" type="text">
+          </div>
+        </div>
+      </div>
+      <div ngModelGroup="address">
+        <div class="form-group">
+          <label for="inputAddress">Address</label>
+          <input class="form-control" id="inputAddress" name="address1" ngModel placeholder="Andreas Vesaliusstraat 45c"
+                 type="text">
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2">Address 2</label>
+          <input class="form-control" id="inputAddress2" name="address2" ngModel
+                 placeholder="Apartment, studio, or floor" type="text">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity">City</label>
+            <input class="form-control" id="inputCity" name="city" ngModel placeholder="City" type="text">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip">Postal code</label>
+            <input class="form-control" id="inputZip" name="zip" ngModel placeholder="1000" type="text">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">Country</label>
+            <select class="form-control" id="inputState">
+              <option selected>Choose...</option>
+              <option>Belgium</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" id="gridCheck" type="checkbox">
+          <label class="form-check-label" for="gridCheck">
+            I Agree with the terms and conditions
+          </label>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Sign Up</button>
+    </form>
+  </div>
+</div>

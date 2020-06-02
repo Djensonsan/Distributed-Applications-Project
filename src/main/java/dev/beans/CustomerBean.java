@@ -6,6 +6,7 @@ import dev.entities.CustomerEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless(name = "customerEJB")
 public class CustomerBean {
@@ -17,13 +18,24 @@ public class CustomerBean {
 
     public CustomerEntity getCustomer(Long customerId) throws CustomerNotFoundException {
         CustomerEntity customer = em.find(CustomerEntity.class, customerId);
-        if (customer == null){
+        if (customer == null) {
             throw new CustomerNotFoundException();
         }
         return customer;
     }
 
-    public CustomerEntity addCustomer(CustomerEntity customer){
+    public List<CustomerEntity> getCustomers() throws CustomerNotFoundException {
+        List<CustomerEntity> customerEntities;
+        customerEntities = em
+                .createQuery("Select c from CustomerEntity c", CustomerEntity.class)
+                .getResultList();
+        if (customerEntities.isEmpty()) {
+            throw new CustomerNotFoundException();
+        }
+        return customerEntities;
+    }
+
+    public CustomerEntity addCustomer(CustomerEntity customer) {
         em.persist(customer);
         em.flush();
         em.refresh(customer);
@@ -33,7 +45,7 @@ public class CustomerBean {
     public CustomerEntity updateCustomer(CustomerEntity newCustomer) throws CustomerNotFoundException {
         Long customerId = newCustomer.getCustomerId();
         CustomerEntity oldCustomer = em.find(CustomerEntity.class, customerId);
-        if(oldCustomer == null){
+        if (oldCustomer == null) {
             throw new CustomerNotFoundException();
         }
         oldCustomer.setAddress(newCustomer.getAddress());
