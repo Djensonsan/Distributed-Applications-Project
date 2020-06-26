@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="run" type="CompoundRunConfigurationType">
-    <toRun name="GlassFish" type="GlassfishConfiguration" />
+    <toRun name="GlassFish 5.201.0" type="GlassfishConfiguration" />
     <toRun name="Angular CLI Server (Angular)" type="js.build_tools.npm" />
     <method v="2" />
   </configuration>

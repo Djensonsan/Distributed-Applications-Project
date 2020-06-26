@@ -1,6 +1,7 @@
 package dev.servlets;
 
 import dev.beans.CartBean;
+import dev.interfaces.Cart;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -12,14 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet("/ShoppingCartServlet")
+@WebServlet(name = "shoppingCartServlet",urlPatterns = "/ShoppingCartServlet")
 public class ShoppingCartServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static final String CART_SESSION_KEY = "shoppingCart";
-
-    private CartBean cartBean;
-
 
     public ShoppingCartServlet() {
         super();
@@ -29,8 +27,7 @@ public class ShoppingCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         System.out.println("Hello from servlet");
-
-        cartBean = (CartBean) request.getSession().getAttribute(CART_SESSION_KEY);
+        Cart cartBean = (Cart) request.getSession().getAttribute(CART_SESSION_KEY);
 
         if (cartBean == null) {
             // EJB is not yet in the HTTP session
@@ -38,8 +35,7 @@ public class ShoppingCartServlet extends HttpServlet {
             // We obtain a CartBean instance and add it to the session object.
             try {
                 InitialContext ic = new InitialContext();
-                cartBean = (CartBean)
-                        ic.lookup("java:dev/beans/CartBean.java");
+                cartBean = (Cart) ic.lookup("java:module/CartBean");
 
                 request.getSession().setAttribute(CART_SESSION_KEY, cartBean);
 
