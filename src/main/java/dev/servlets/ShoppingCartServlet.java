@@ -24,7 +24,6 @@ public class ShoppingCartServlet extends HttpServlet {
 
     public ShoppingCartServlet() {
         super();
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -80,7 +79,5 @@ public class ShoppingCartServlet extends HttpServlet {
             cartBean.checkOut();
             System.out.println("Shopping cart checked out ");
         }
-
     }
-
 }

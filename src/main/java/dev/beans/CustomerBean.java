@@ -67,7 +67,6 @@ public class CustomerBean {
     public boolean authenticateCustomer(String email, String password){
 
         Query query = em.createQuery("Select c.customerId FROM CustomerEntity c WHERE c.person.email = :email AND c.person.password = :password");
-        // Note: SQL Injections possible
         query.setParameter("email", email);
         query.setParameter("password", password);
         try{

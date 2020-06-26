@@ -30,7 +30,6 @@ public class CartBean implements Cart {
     @Override
     public void addProductToCart(ItemEntity product) {
         products.add(product);
-
     }
 
     @Override
@@ -40,6 +39,5 @@ public class CartBean implements Cart {
 //            em.persist(product);
 //        }
         products.clear();
-
     }
 }

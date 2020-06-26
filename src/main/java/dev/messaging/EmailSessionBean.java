@@ -5,6 +5,8 @@ import dev.entities.OrderEntity;
 
 import javax.annotation.Resource;
 import javax.ejb.*;
+import javax.interceptor.AroundTimeout;
+import javax.interceptor.InvocationContext;
 import javax.mail.Message;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -89,6 +91,19 @@ public class EmailSessionBean {
             Transport.send(simpleMail);
         } catch (MessagingException e)  {
             e.printStackTrace();
+        }
+    }
+
+    @AroundTimeout
+    public Object logTimer(InvocationContext ic) throws Exception {
+        Timer timer = (Timer) ic.getTimer();
+        ArrayList <Object> timerInfo = (ArrayList<Object>) timer.getInfo();
+        CustomerEntity customer = (CustomerEntity) timerInfo.get(0);
+        System.out.println("Entering: "+ic.getMethod().toString());
+        try {
+            return ic.proceed();
+        } finally {
+            System.out.println("Reminder mail was send to: "+customer.getPerson().getEmail());
         }
     }
 }
