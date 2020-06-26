@@ -1,8 +1,6 @@
 package dev.servlets;
 
-import dev.beans.CartBean;
 import dev.beans.CustomerBean;
-import dev.beans.CustomerTestBean;
 import dev.interfaces.Cart;
 
 import javax.ejb.EJB;
@@ -37,9 +35,11 @@ public class ShoppingCartServlet extends HttpServlet {
         // Authentication
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+
+        System.out.println(email + password);
         Boolean userAuthenticated = customerBean.authenticateCustomer(email, password);
 
-        if(!userAuthenticated){
+        if (!userAuthenticated) {
             System.out.println("User doesn't exist!");
         } else {
             System.out.println("User exists, please continue!");
@@ -60,6 +60,8 @@ public class ShoppingCartServlet extends HttpServlet {
             } catch (NamingException e) {
                 throw new ServletException(e);
             }
+        } else {
+            System.out.println("shoppingCart found!");
         }
 
         String productName = request.getParameter("product");

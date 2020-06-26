@@ -1,11 +1,13 @@
 <app-navbar></app-navbar>
 <div class="container-fluid text-center">
-  <form class="form-signin">
+  <form #userForm="ngForm" (ngSubmit)="OnLogin(userForm)" class="form-signin">
     <h1 class="h3 mb-3 font-weight-normal">Sign In To Order</h1>
     <label class="sr-only" for="inputEmail">Email address</label>
-    <input autofocus class="form-control" id="inputEmail" placeholder="Email address" required type="email">
+    <input autofocus class="form-control" id="inputEmail" name="email" ngModel placeholder="Email address" required
+           type="email">
     <label class="sr-only" for="inputPassword">Password</label>
-    <input class="form-control" id="inputPassword" placeholder="Password" required type="password">
+    <input class="form-control" id="inputPassword" name="password" ngModel placeholder="Password" required
+           type="password">
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
