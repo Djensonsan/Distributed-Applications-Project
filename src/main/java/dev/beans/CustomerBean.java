@@ -24,7 +24,7 @@ public class CustomerBean {
         return customer;
     }
 
-    public List<CustomerEntity> getCustomers() throws CustomerNotFoundException {
+    public List <CustomerEntity> getCustomers() throws CustomerNotFoundException {
         List<CustomerEntity> customerEntities;
         customerEntities = em
                 .createQuery("Select c from CustomerEntity c", CustomerEntity.class)

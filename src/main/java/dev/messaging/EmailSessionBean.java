@@ -87,7 +87,7 @@ public class EmailSessionBean {
             simpleMail.setContent(mailContent);
 
             Transport.send(simpleMail);
-        } catch (MessagingException e) {
+        } catch (MessagingException e)  {
             e.printStackTrace();
         }
     }
