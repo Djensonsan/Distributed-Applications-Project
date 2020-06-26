@@ -1,8 +1,11 @@
 package dev.servlets;
 
 import dev.beans.CartBean;
+import dev.beans.CustomerBean;
+import dev.beans.CustomerTestBean;
 import dev.interfaces.Cart;
 
+import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -18,6 +21,8 @@ public class ShoppingCartServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static final String CART_SESSION_KEY = "shoppingCart";
+    @EJB
+    private CustomerBean customerBean;
 
     public ShoppingCartServlet() {
         super();
@@ -28,6 +33,17 @@ public class ShoppingCartServlet extends HttpServlet {
 
         System.out.println("Hello from servlet");
         Cart cartBean = (Cart) request.getSession().getAttribute(CART_SESSION_KEY);
+
+        // Authentication
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        Boolean userAuthenticated = customerBean.authenticateCustomer(email, password);
+
+        if(!userAuthenticated){
+            System.out.println("User doesn't exist!");
+        } else {
+            System.out.println("User exists, please continue!");
+        }
 
         if (cartBean == null) {
             // EJB is not yet in the HTTP session

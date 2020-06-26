@@ -5,7 +5,9 @@ import dev.entities.CustomerEntity;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Stateless(name = "customerEJB")
@@ -60,5 +62,18 @@ public class CustomerBean {
             throw new CustomerNotFoundException();
         }
         em.remove(customer);
+    }
+
+    public boolean authenticateCustomer(String email, String password){
+        Query q = em.createNativeQuery("Select CUSTOMERID FROM customers WHERE EMAIL = :email AND PASSWORD = :password", Long.class);
+        // Note: SQL Injections possible
+        q.setParameter("email", email);
+        q.setParameter("password", password);
+        try{
+            q.getSingleResult();
+        } catch (NoResultException e){
+            return false;
+        }
+        return true;
     }
 }
