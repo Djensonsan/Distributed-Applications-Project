@@ -65,12 +65,13 @@ public class CustomerBean {
     }
 
     public boolean authenticateCustomer(String email, String password){
-        Query q = em.createNativeQuery("Select CUSTOMERID FROM customers WHERE EMAIL = :email AND PASSWORD = :password", Long.class);
+
+        Query query = em.createQuery("Select c.customerId FROM CustomerEntity c WHERE c.person.email = :email AND c.person.password = :password");
         // Note: SQL Injections possible
-        q.setParameter("email", email);
-        q.setParameter("password", password);
+        query.setParameter("email", email);
+        query.setParameter("password", password);
         try{
-            q.getSingleResult();
+            query.getSingleResult();
         } catch (NoResultException e){
             return false;
         }
