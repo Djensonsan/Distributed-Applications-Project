@@ -24,9 +24,6 @@ public class ImageRestService {
     @Context
     private UriInfo uriInfo;
 
-    @PersistenceContext
-    private EntityManager em;
-
     @EJB
     DisplayBean displayBean;
 

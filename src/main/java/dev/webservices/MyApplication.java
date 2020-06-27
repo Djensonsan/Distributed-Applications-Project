@@ -15,14 +15,4 @@ public class MyApplication extends ResourceConfig {
         packages("dev.webservices");
         register(MultiPartFeature.class);
     }
-
-    //The method returns a non-empty collection with classes, that must be included in the published JAX-RS application
-//    @Override
-//    public Set<Class<?>> getClasses() {
-//        HashSet h = new HashSet<Class<?>>();
-//        h.add(CustomerRestService.class);
-//        h.add(OrderRestService.class);
-//        h.add(ImageRestService.class);
-//        return h;
-//    }
 }

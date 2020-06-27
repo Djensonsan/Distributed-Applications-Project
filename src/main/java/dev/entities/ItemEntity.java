@@ -20,7 +20,7 @@ public class ItemEntity implements Serializable {
     @JoinTable(name = "Items_Displays",
             joinColumns = @JoinColumn(name = "ITEMID"),
             inverseJoinColumns = @JoinColumn(name = "DISPLAYID") )
-    private List<ItemDisplayEntity> itemDisplays = new ArrayList<>();
+    private List <ItemDisplayEntity> itemDisplays = new ArrayList<>();
 
     public ItemEntity() {
     }
@@ -87,5 +87,9 @@ public class ItemEntity implements Serializable {
 
     public void setQuantityUnit(String quantityUnit) {
         this.quantityUnit = quantityUnit;
+    }
+
+    public void addItemDisplay(ItemDisplayEntity itemDisplayEntity){
+        this.itemDisplays.add(itemDisplayEntity);
     }
 }

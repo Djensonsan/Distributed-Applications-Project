@@ -27,21 +27,21 @@ public class TestDevServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        this.customerBean.addCustomer();
-//        this.customerBean.addOrder();
-//        this.customerBean.addOrdertoCustomer();
-////        this.customerBean.addCourier();
-////        this.customerBean.addShop();
-//
-//        List<OrderEntity> orders = this.customerBean.getCustomerOrders(1L);
-//        PrintWriter out = response.getWriter();
-//
-//        response.setContentType("text/html");
-//        out.println("All orders of customer: 1");
-//        out.println("<ul>");
-//        for(OrderEntity o : orders) {
-//            out.println("<li> Order status:"+o.getStatus()+"</li>");
-//        }
-//        out.println("</ul>");
+        this.customerBean.addCustomer();
+        this.customerBean.addOrder();
+        this.customerBean.addOrdertoCustomer();
+//        this.customerBean.addCourier();
+//        this.customerBean.addShop();
+
+        List<OrderEntity> orders = this.customerBean.getCustomerOrders(1L);
+        PrintWriter out = response.getWriter();
+
+        response.setContentType("text/html");
+        out.println("All orders of customer: 1");
+        out.println("<ul>");
+        for(OrderEntity o : orders) {
+            out.println("<li> Order status:"+o.getStatus()+"</li>");
+        }
+        out.println("</ul>");
     }
 }
