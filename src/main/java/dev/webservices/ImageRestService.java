@@ -1,87 +1,77 @@
 package dev.webservices;
 
+import dev.beans.DisplayBean;
+import dev.customExceptions.ItemDisplayAlreadyExistsException;
+import dev.customExceptions.ItemDisplayNotFoundException;
+import dev.entities.ItemDisplayEntity;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.*;
 
-// Taken From Tutorial
-@Path("upload")
+@Path("images")
 @Stateless
 public class ImageRestService {
-
-    private static final String UPLOAD_FOLDER = "c:/uploadedFiles/";
-
     @Context
-    private UriInfo context;
+    private UriInfo uriInfo;
+
+    @PersistenceContext
+    private EntityManager em;
+
+    @EJB
+    DisplayBean displayBean;
 
     @POST
-    @Path("/image")
+    @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadFile(
-            @FormDataParam("file") InputStream uploadedInputStream,
-            @FormDataParam("file") FormDataContentDisposition fileDetail) {
+    public Response uploadFile (@FormDataParam("file") InputStream uploadedInputStream, @FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len;
 
-        System.out.println("Called Upload Image");
-        // check if all form parameters are provided
-        if (uploadedInputStream == null || fileDetail == null)
-            return Response.status(400).entity("Invalid form data").build();
-        // create our destination folder, if it not exists
-        try {
-            createFolderIfNotExists(UPLOAD_FOLDER);
-        } catch (SecurityException se) {
-            return Response.status(500)
-                    .entity("Can not create destination folder on server")
-                    .build();
+        while ((len = uploadedInputStream.read(buffer)) != -1) {
+            byteArrayOutputStream.write(buffer, 0, len);
         }
-        String uploadedFileLocation = UPLOAD_FOLDER + fileDetail.getFileName();
+
+        ItemDisplayEntity displayEntity = new ItemDisplayEntity(fileDetail.getFileName(), fileDetail.getType(), byteArrayOutputStream.toByteArray());
         try {
-            saveToFile(uploadedInputStream, uploadedFileLocation);
-        } catch (IOException e) {
-            return Response.status(500).entity("Can not save file").build();
+            displayBean.addImage(displayEntity);
+            return Response.status(Response.Status.CREATED).build();
+        } catch (ItemDisplayAlreadyExistsException e){
+            return Response.status(Response.Status.CONFLICT).build();
         }
-        return Response.status(200)
-                .entity("File saved to " + uploadedFileLocation).build();
     }
 
-    /**
-     * Utility method to save InputStream data to target location/file
-     *
-     * @param inStream - InputStream to be saved
-     * @param target   - full path to destination file
-     */
-    private void saveToFile(InputStream inStream, String target)
-            throws IOException {
-        OutputStream out = null;
-        int read = 0;
-        byte[] bytes = new byte[1024];
-        out = new FileOutputStream(new File(target));
-        while ((read = inStream.read(bytes)) != -1) {
-            out.write(bytes, 0, read);
+    @GET
+    @Path("/get/{imageName}")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response getImage(@PathParam("imageName") String imageName) {
+        try {
+            ItemDisplayEntity displayEntity = displayBean.getImage(imageName);
+            return Response.ok(displayEntity.getImage(), MediaType.APPLICATION_OCTET_STREAM)
+                    .header("Content-Disposition", "attachment; filename=" + displayEntity.getImageName()).build();
+        } catch (ItemDisplayNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        out.flush();
-        out.close();
     }
 
-    /**
-     * Creates a folder to desired location if it not already exists
-     *
-     * @param dirName - full path to the folder
-     * @throws SecurityException - in case you don't have permission to create the folder
-     */
-    private void createFolderIfNotExists(String dirName)
-            throws SecurityException {
-        File theDir = new File(dirName);
-        if (!theDir.exists()) {
-            theDir.mkdir();
+    @DELETE
+    @Path("/delete/{imageName}")
+    public Response deleteImage(@PathParam("imageName") String imageName){
+        try {
+            displayBean.deleteImage(imageName);
+            return Response.ok().build();
+        } catch (ItemDisplayNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
 }

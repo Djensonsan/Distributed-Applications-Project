@@ -12,13 +12,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.awt.*;
 
 @Path("order")
 @Stateless
 public class OrderRestService {
     @Context
     private UriInfo uriInfo;
+
 
     @EJB
     private OrderBean orderBean;
