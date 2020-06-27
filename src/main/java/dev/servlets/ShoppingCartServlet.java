@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(name = "shoppingCartServlet",urlPatterns = "/ShoppingCartServlet")
+@WebServlet(name = "shoppingCartServlet", urlPatterns = "/ShoppingCartServlet")
 public class ShoppingCartServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

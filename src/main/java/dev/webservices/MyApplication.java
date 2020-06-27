@@ -15,6 +15,7 @@ public class MyApplication extends Application {
         HashSet h = new HashSet<Class<?>>();
         h.add(CustomerRestService.class);
         h.add(OrderRestService.class);
+//        h.add(ImageRestService.class);
         return h;
     }
 }
