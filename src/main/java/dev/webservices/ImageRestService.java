@@ -56,7 +56,7 @@ public class ImageRestService {
             ItemDisplayEntity displayEntity = displayBean.getImage(imageName);
             return Response.ok(displayEntity.getImage(), MediaType.APPLICATION_OCTET_STREAM)
                     .header("Content-Disposition", "attachment; filename=" + displayEntity.getImageName()).build();
-        } catch (ItemDisplayNotFoundException e){
+        } catch (ItemDisplayNotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
