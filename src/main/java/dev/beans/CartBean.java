@@ -1,10 +1,9 @@
 package dev.beans;
 
 import dev.entities.ItemEntity;
-import dev.interfaces.Cart;
 import dev.interceptors.activeCartInterceptor;
+import dev.interfaces.Cart;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
 import javax.ejb.TransactionAttribute;
@@ -23,12 +22,7 @@ public class CartBean implements Cart {
     @PersistenceContext(unitName = "DAPersistenceUnit")
     private EntityManager em;
 
-    private List products;
-
-    @PostConstruct
-    private void initializeBean() {
-        products = new ArrayList<ItemEntity>();
-    }
+    private List products = new ArrayList<ItemEntity>();
 
     @Override
     public void addProductToCart(ItemEntity product) {
@@ -43,4 +37,19 @@ public class CartBean implements Cart {
 //        }
         products.clear();
     }
+
+    @Override
+    public void delete() {
+        products.clear();
+    }
+
+    @Override
+    public List getProducts() {
+        return products;
+    }
+
+    public void setProducts(List products) {
+        this.products = products;
+    }
+
 }
