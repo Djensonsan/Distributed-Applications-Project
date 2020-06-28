@@ -31,18 +31,18 @@ public class ShoppingCartServlet extends HttpServlet {
         System.out.println("Hello from servlet");
         Cart cartBean = (Cart) request.getSession().getAttribute(CART_SESSION_KEY);
 
-        // Authentication
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        System.out.println(email + password);
-        Boolean userAuthenticated = customerBean.authenticateCustomer(email, password);
-
-        if (!userAuthenticated) {
-            System.out.println("User doesn't exist!");
-        } else {
-            System.out.println("User exists, please continue!");
-        }
+//        // Authentication
+//        String email = request.getParameter("email");
+//        String password = request.getParameter("password");
+//
+//        System.out.println(email + " " + password);
+//        Boolean userAuthenticated = customerBean.authenticateCustomer(email, password);
+//
+//        if (!userAuthenticated) {
+//            System.out.println("User doesn't exist!");
+//        } else {
+//            System.out.println("User exists, please continue!");
+//        }
 
         if (cartBean == null) {
             // EJB is not yet in the HTTP session
@@ -79,5 +79,13 @@ public class ShoppingCartServlet extends HttpServlet {
             cartBean.checkOut();
             System.out.println("Shopping cart checked out ");
         }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

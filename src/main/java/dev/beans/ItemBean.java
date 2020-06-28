@@ -4,6 +4,7 @@ import dev.customExceptions.ItemDisplayNotFoundException;
 import dev.customExceptions.ItemNotFoundException;
 import dev.entities.ItemDisplayEntity;
 import dev.entities.ItemEntity;
+import dev.entities.ItemDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -23,6 +24,14 @@ public class ItemBean {
 
     public ItemBean() {
     }
+
+    // Increment Stock
+    // Decrement Stock
+    // Remove Item
+    // Update Item
+    // Get All Items
+    // Add Image To Item
+    // Remove Image From Item
 
     public void addItem(ItemEntity itemEntity){
         em.persist(itemEntity);
@@ -55,15 +64,22 @@ public class ItemBean {
         return itemDisplayNames;
     }
 
+    public ArrayList<ItemDTO> getAllItems (){
+        List <ItemEntity> itemEntities = em.createQuery("select item from ItemEntity item", ItemEntity.class).getResultList();
+        ArrayList<ItemDTO> ItemDTOS = new ArrayList<>();
+        for (ItemEntity item: itemEntities) {
+            ArrayList<String> imageUrls = new ArrayList<>();
+            for (ItemDisplayEntity display:item.getItemDisplays()) {
+                String url = "http://localhost:8080/DA_Project/images/get/" + display.getImageName();
+                imageUrls.add(url);
+            }
+            ItemDTO itemDTO = new ItemDTO(item.getItemId(),item.getName(),item.getDescription(),item.getStockQuantity(),item.getQuantityUnit(),item.getPrice(), imageUrls);
+            ItemDTOS.add(itemDTO);
+        }
+        return ItemDTOS;
+    }
+
     public void updateItem(ItemEntity itemEntity){
 
     }
-
-    // Increment Stock
-    // Decrement Stock
-    // Remove Item
-    // Update Item
-    // Get All Items
-    // Add Image To Item
-    // Remove Image From Item
 }

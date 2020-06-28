@@ -21,7 +21,7 @@ public class OrderNotifierMDB implements MessageListener {
     public OrderNotifierMDB() {
     }
 
-    public void onMessage(Message message){
+    public void onMessage(Message message) {
         ObjectMessage ObjectOrder = (ObjectMessage) message;
         OrderEntity order;
         try {

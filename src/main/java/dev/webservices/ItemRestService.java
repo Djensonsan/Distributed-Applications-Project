@@ -3,7 +3,7 @@ package dev.webservices;
 import dev.beans.ItemBean;
 import dev.customExceptions.ItemDisplayNotFoundException;
 import dev.customExceptions.ItemNotFoundException;
-import dev.entities.ItemDisplayEntity;
+import dev.entities.ItemDTO;
 import dev.entities.ItemEntity;
 
 import javax.ejb.EJB;
@@ -51,7 +51,7 @@ public class ItemRestService {
     @Path("/get/{itemId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getItem(@PathParam("itemId") Long itemId){
-        try{
+        try {
             ItemEntity itemEntity = itemBean.getItem(itemId);
             return Response.ok(itemEntity, MediaType.APPLICATION_JSON).build();
         } catch (ItemNotFoundException e){
@@ -70,4 +70,14 @@ public class ItemRestService {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
+
+    @GET
+    @Path("/getAllItems")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllItems(){
+        ArrayList <ItemDTO> itemDTOs = itemBean.getAllItems();
+        return Response.ok(itemDTOs, MediaType.APPLICATION_JSON).build();
+    }
+
+    // Get All Items -> url images
 }
