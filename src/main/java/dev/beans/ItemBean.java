@@ -71,7 +71,7 @@ public class ItemBean {
         for (ItemEntity item: itemEntities) {
             ArrayList<String> imageUrls = new ArrayList<>();
             for (ItemDisplayEntity display:item.getItemDisplays()) {
-                String url = "http://localhost:8080/DA_Project/images/get/" + display.getImageName();
+                String url = "http://localhost:8080/DA_Project/images/"+display.getImageName();
                 imageUrls.add(url);
             }
             ItemDTO itemDTO = new ItemDTO(item.getItemId(),item.getName(),item.getDescription(),item.getStockQuantity(),item.getQuantityUnit(),item.getPrice(), imageUrls);
