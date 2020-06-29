@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-
 @WebServlet(name = "shoppingCartServlet", urlPatterns = "/ShoppingCartServlet")
 public class ShoppingCartServlet extends HttpServlet {
 
