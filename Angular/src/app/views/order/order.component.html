@@ -8,21 +8,25 @@
       <thead>
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">First Name</th>
         <th scope="col">Date</th>
+        <th scope="col">Name</th>
         <th scope="col">Order</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let order of orders; index as i">
-        <th scope="row">{{ i + 1 }}</th>
-        <td>
-          {{ order.requiredDateEnd }}
-        </td>
-        <td>{{ order.status }}</td>
-        <td>{{ order.orderedItems }}</td>
-      </tr>
+      <div *ngFor="let customer of orders;">
+        <tr *ngFor="let order of customer.orders;">
+          <th scope="row">{{order.orderId}}</th>
+          <td>
+            {{ order.requiredDateEnd }}
+          </td>
+          <td>{{ customer.person.firstname }}</td>
+          <td><span *ngFor="let item of order.orderedItems;">{{item}}</span></td>
+        </tr>
+      </div>
       </tbody>
     </table>
   </div>
 </div>
+<button (click)="logout()" class="btn btn-danger m-3 " style="float: right" type="button">Logout</button>
+

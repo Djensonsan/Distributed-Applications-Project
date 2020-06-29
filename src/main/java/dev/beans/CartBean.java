@@ -3,7 +3,6 @@ package dev.beans;
 import dev.DTOs.ItemDTO;
 import dev.customExceptions.CustomerNotFoundException;
 import dev.customExceptions.ItemNotFoundException;
-import dev.embeddables.AddressEmbeddable;
 import dev.entities.OrderEntity;
 import dev.entities.OrderItemEntity;
 import dev.interceptors.activeCartInterceptor;
@@ -67,6 +66,7 @@ public class CartBean implements Cart {
             orderBean.addOrderToCustomer(orderEntity, customerID);
             products.clear();
             total = 0.0;
+            em.persist(orderEntity);
         } catch (CustomerNotFoundException e) {
             e.printStackTrace();
         } catch (JMSException e) {
