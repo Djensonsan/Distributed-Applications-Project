@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,8 @@ export class LoginService {
   }
 
   send(data) {
-    return this.http.get(this.url, {params: data});
+    const params = new HttpParams().set('email', data.email).set('password', data.password);
+    console.log(params);
+    return this.http.get(this.url, {params});
   }
 }

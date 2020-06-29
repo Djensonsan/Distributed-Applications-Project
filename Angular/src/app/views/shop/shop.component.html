@@ -1,1 +1,71 @@
-<p>shop-management works!</p>
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <div class="row p-2">
+    <div class="col-8">
+      <h2>Products</h2>
+      <table class="table table-striped cart-list">
+        <thead>
+        <tr>
+          <th>
+            Item
+          </th>
+          <th>
+            Price
+          </th>
+          <th>
+            Order
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of items; index as i">
+          <td class="d-md-flex align-items-center">
+            <figure><img alt="thumb" class="lazy" data-src="img/menu-thumb-5.jpg" src="{{item.urls[0]}}"
+                         style="max-height: 3rem; margin-right: 1rem;"></figure>
+            <div class="flex-md-column">
+              <h4>{{item.name}}</h4>
+              <p>
+                {{item.description}}
+              </p>
+            </div>
+          </td>
+          <td>
+            <strong>{{item.price}}</strong>
+          </td>
+          <td class="options">
+            <a class="btn btn-success" href="#">Add</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 100%;">
+        <div class="card-header bg-primary text-light">
+          Shopping cart
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Shopping cart</h5>
+          <p class="card-text">This is an example of a Stateful Session bean, the cart state is maintained in the
+            server.</p>
+          <ul class="clearfix list-group">
+            <li class="list-group-item"><a href="#0">2x Burrito</a><span style="float: right">$14</span></li>
+            <li class="list-group-item"><a href="#0">1x Chicken</a><span style="float: right">$18</span></li>
+            <li class="list-group-item"><a href="#0">2x Corona Beer</a><span style="float: right">$9</span></li>
+            <li class="list-group-item"><a href="#0">2x Cheese Cake</a><span style="float: right">$11</span></li>
+          </ul>
+
+          <ul class="list-group mt-2 mb-2">
+            <li class="list-group-item active">Total<span style="float: right">$66</span></li>
+          </ul>
+
+          <a class="btn btn-success mr-2" href="#">Checkout</a>
+          <a class="btn btn-danger" href="#" style="float: right">Clear</a>
+
+        </div>
+      </div>
+    </div>
+    s
+  </div>
+</div>
+

@@ -13,6 +13,9 @@ import {OrderComponent} from './views/order/order.component';
 import {ShopComponent} from './views/shop/shop.component';
 import {RouterModule} from '@angular/router';
 import {HomeComponent} from './views/home/home.component';
+import {LoginComponent} from './views/login/login.component';
+import {AuthService} from './services/auth.service';
+import {AuthGuard} from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import {HomeComponent} from './views/home/home.component';
     CustomerComponent,
     OrderComponent,
     ShopComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -33,11 +37,12 @@ import {HomeComponent} from './views/home/home.component';
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'customer', component: CustomerComponent},
-      {path: 'order', component: OrderComponent},
       {path: 'shop', component: ShopComponent},
+      {path: 'order', component: OrderComponent, canActivate: [AuthGuard]},
+      {path: 'login', component: LoginComponent}
     ])
   ],
-  providers: [PostService],
+  providers: [PostService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
