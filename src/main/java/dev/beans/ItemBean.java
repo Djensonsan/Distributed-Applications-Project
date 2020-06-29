@@ -4,10 +4,11 @@ import dev.customExceptions.ItemDisplayNotFoundException;
 import dev.customExceptions.ItemNotFoundException;
 import dev.entities.ItemDisplayEntity;
 import dev.entities.ItemEntity;
-import dev.entities.ItemDTO;
+import dev.DTOs.ItemDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.mail.FetchProfile;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
@@ -22,9 +23,6 @@ public class ItemBean {
     @EJB
     DisplayBean displayBean;
 
-    public ItemBean() {
-    }
-
     // Increment Stock
     // Decrement Stock
     // Remove Item
@@ -32,6 +30,9 @@ public class ItemBean {
     // Get All Items
     // Add Image To Item
     // Remove Image From Item
+
+    public ItemBean() {
+    }
 
     public void addItem(ItemEntity itemEntity){
         em.persist(itemEntity);
@@ -70,7 +71,7 @@ public class ItemBean {
         for (ItemEntity item: itemEntities) {
             ArrayList<String> imageUrls = new ArrayList<>();
             for (ItemDisplayEntity display:item.getItemDisplays()) {
-                String url = "http://localhost:8080/DA_Project/images/get/" + display.getImageName();
+                String url = "http://localhost:8080/DA_Project/images/"+display.getImageName();
                 imageUrls.add(url);
             }
             ItemDTO itemDTO = new ItemDTO(item.getItemId(),item.getName(),item.getDescription(),item.getStockQuantity(),item.getQuantityUnit(),item.getPrice(), imageUrls);
@@ -79,7 +80,11 @@ public class ItemBean {
         return ItemDTOS;
     }
 
-    public void updateItem(ItemEntity itemEntity){
-
+    public void deleteItem(Long itemId) throws ItemNotFoundException{
+        ItemEntity itemEntity = em.find(ItemEntity.class, itemId);
+        if (itemEntity == null){
+            throw new ItemNotFoundException();
+        }
+        em.remove(itemEntity);
     }
 }
