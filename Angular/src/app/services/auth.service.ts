@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 interface MyData {
   success: boolean;
@@ -25,8 +25,6 @@ export class AuthService {
 
   getUserDetails(username, password) {
     // TODO: Get details from API
-    const params = new HttpParams().set('email', username).set('password', password);
-    console.log(params);
-    return this.http.post<MyData>('http://localhost:8080/DA_Project/auth', {params});
+    return this.http.post<MyData>('http://localhost:8080/DA_Project/auth?email=' + username + '&password=' + password, {});
   }
 }
