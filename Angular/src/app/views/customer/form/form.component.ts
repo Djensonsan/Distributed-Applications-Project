@@ -3,7 +3,6 @@ import {NgForm} from '@angular/forms';
 import {Customer} from '../../../interfaces/customer';
 import {PostService} from '../../../services/post.service';
 
-
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -26,8 +25,12 @@ export class FormComponent implements OnInit {
     const body = JSON.stringify(this.customer);
     console.log(body);
     this.service.send(body)
-      .subscribe(response => console.log(response), error => {
-        console.log(error);
-      });
+      .subscribe(
+        response => {
+          console.log(response);
+          window.location.reload();
+        }, error => {
+          console.log(error);
+        });
   }
 }
