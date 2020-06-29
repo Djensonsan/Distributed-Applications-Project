@@ -5,28 +5,28 @@ import dev.interceptors.activeCartInterceptor;
 import dev.interfaces.Cart;
 
 import javax.ejb.Stateful;
-import javax.ejb.StatefulTimeout;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Stateful(name = "CartBean")
-@StatefulTimeout(unit = TimeUnit.MINUTES, value = 2)
 @Interceptors(activeCartInterceptor.class)
 public class CartBean implements Cart {
     @PersistenceContext(unitName = "DAPersistenceUnit")
     private EntityManager em;
-
+    private Double total = 0.0;
     private List products = new ArrayList<ItemEntity>();
 
     @Override
     public void addProductToCart(ItemEntity product) {
         products.add(product);
+        total += product.getPrice();
     }
 
     @Override
@@ -36,16 +36,28 @@ public class CartBean implements Cart {
 //            em.persist(product);
 //        }
         products.clear();
+        //total
     }
 
     @Override
     public void delete() {
         products.clear();
+        total = 0.0;
     }
 
     @Override
     public List getProducts() {
         return products;
+    }
+
+    @Override
+    public String getJSON() {
+        Jsonb jsonb = JsonbBuilder.create();
+        String result = "[\n{\n" +
+                "  \"products\": " + jsonb.toJson(products) + ",\n" +
+                "  \"total\": " + (Math.round(total * 100.0) / 100.0) + "\n" +
+                "}\n]";
+        return result;
     }
 
     public void setProducts(List products) {

@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ShopComponent implements OnInit {
   items: any[];
+  shoppingcart: any[];
 
   constructor(private http: HttpClient) {
   }
@@ -16,9 +17,25 @@ export class ShopComponent implements OnInit {
     this.http.get<any>('http://localhost:8080/DA_Project/items/getAllItems')
       .subscribe(response => {
         this.items = response;
-        console.log(response);
-        console.log(response[0].description);
-        console.log(response[0].urls[0]);
+      });
+
+    this.http.get<any>('http://localhost:8080/DA_Project/ShoppingCartServlet')
+      .subscribe(response => {
+        this.shoppingcart = response;
+      });
+  }
+
+  add(id) {
+    this.http.get<any>('http://localhost:8080/DA_Project/ShoppingCartServlet?product=' + id)
+      .subscribe(response => {
+        this.shoppingcart = response;
+      });
+  }
+
+  delete() {
+    this.http.get<any>('http://localhost:8080/DA_Project/ShoppingCartServlet?delete=yes')
+      .subscribe(response => {
+        this.shoppingcart = response;
       });
   }
 

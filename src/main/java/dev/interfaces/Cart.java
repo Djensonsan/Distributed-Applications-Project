@@ -15,4 +15,6 @@ public interface Cart {
     void delete();
 
     List getProducts();
+
+    String getJSON();
 }

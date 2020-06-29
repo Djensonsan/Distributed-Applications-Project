@@ -33,7 +33,7 @@
             <strong>{{item.price}}</strong>
           </td>
           <td class="options">
-            <a class="btn btn-success" href="#">Add</a>
+            <a (click)="add(item.itemId)" class="btn btn-success text-light">Add</a>
           </td>
         </tr>
         </tbody>
@@ -48,24 +48,23 @@
           <h5 class="card-title">Shopping cart</h5>
           <p class="card-text">This is an example of a Stateful Session bean, the cart state is maintained in the
             server.</p>
-          <ul class="clearfix list-group">
-            <li class="list-group-item"><a href="#0">2x Burrito</a><span style="float: right">$14</span></li>
-            <li class="list-group-item"><a href="#0">1x Chicken</a><span style="float: right">$18</span></li>
-            <li class="list-group-item"><a href="#0">2x Corona Beer</a><span style="float: right">$9</span></li>
-            <li class="list-group-item"><a href="#0">2x Cheese Cake</a><span style="float: right">$11</span></li>
-          </ul>
+          <div *ngFor="let shoppingcart of shoppingcart">
+            <ul class="clearfix list-group">
+              <li *ngFor="let item of shoppingcart.products; index as i" class="list-group-item"><a
+                href="#0">{{item.name}}</a><span style="float: right;">{{item.price}}</span></li>
+            </ul>
 
-          <ul class="list-group mt-2 mb-2">
-            <li class="list-group-item active">Total<span style="float: right">$66</span></li>
-          </ul>
+            <ul class="list-group mt-2 mb-2">
+              <li class="list-group-item active">Total<span style="float: right">{{shoppingcart.total}}</span></li>
+            </ul>
+          </div>
 
           <a class="btn btn-success mr-2" href="#">Checkout</a>
-          <a class="btn btn-danger" href="#" style="float: right">Clear</a>
+          <a (click)="delete()" class="btn btn-danger text-light" style="float: right">Clear</a>
 
         </div>
       </div>
     </div>
-    s
   </div>
 </div>
 
