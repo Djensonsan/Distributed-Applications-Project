@@ -79,8 +79,11 @@ public class ItemBean {
         return ItemDTOS;
     }
 
-    public ItemDTO getItemDTO (Long itemId){
+    public ItemDTO getItemDTO (Long itemId) throws ItemNotFoundException{
         ItemEntity itemEntity = em.find(ItemEntity.class,itemId);
+        if(itemEntity == null){
+            throw new ItemNotFoundException();
+        }
         ArrayList<String> imageUrls = new ArrayList<>();
         for (ItemDisplayEntity display:itemEntity.getItemDisplays()) {
             String url = "http://localhost:8080/DA_Project/images/"+display.getImageName();

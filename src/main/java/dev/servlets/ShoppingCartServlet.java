@@ -1,6 +1,7 @@
 package dev.servlets;
 
 
+import dev.DTOs.ItemDTO;
 import dev.beans.CustomerBean;
 import dev.beans.ItemBean;
 import dev.customExceptions.ItemNotFoundException;
@@ -63,9 +64,9 @@ public class ShoppingCartServlet extends HttpServlet {
         String productId = request.getParameter("product");
         if (productId != null && productId.length() > 0) {
             try {
-                ItemEntity itemEntity = itemBean.getItem(Long.parseLong(productId));
-                cartBean.addProductToCart(itemEntity);
-                System.out.println("product " + itemEntity.getName() + " added");
+                ItemDTO itemDTO = itemBean.getItemDTO(Long.parseLong(productId));
+                cartBean.addProductToCart(itemDTO);
+                System.out.println("product " + itemDTO.getName() + " added");
             } catch (ItemNotFoundException e) {
                 System.out.println("ERROR: Failed to Add Product " + e);
                 response.sendError(400);
