@@ -75,9 +75,9 @@ public class ShoppingCartServlet extends HttpServlet {
 
         //Checkout
         String checkout = request.getParameter("checkout");
-        if (checkout != null && checkout.equalsIgnoreCase("yes")) {
+        if (checkout != null && checkout.length() > 0) {
             // Request instructs to complete the purchase
-            cartBean.checkOut();
+            cartBean.checkOut(Long.parseLong(checkout));
             System.out.println("Shopping cart checked out ");
         }
 

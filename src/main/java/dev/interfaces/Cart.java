@@ -10,7 +10,7 @@ public interface Cart {
 
     void addProductToCart(ItemDTO product);
 
-    void checkOut();
+    void checkOut(long customerID);
 
     void delete();
 
