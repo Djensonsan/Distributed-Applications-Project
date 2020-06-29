@@ -12,6 +12,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.awt.*;
+import java.util.List;
 
 @Path("order")
 @Stateless
@@ -33,6 +35,14 @@ public class OrderRestService {
         } catch (OrderNotFoundException ex){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
+    }
+
+    @GET
+    @Path("/getAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllOrder() {
+        List <OrderEntity> orderEntities = orderBean.getAllOrders();
+        return Response.ok(orderEntities, MediaType.APPLICATION_JSON).build();
     }
 
     @POST

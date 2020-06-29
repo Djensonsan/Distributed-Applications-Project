@@ -1,5 +1,6 @@
 package dev.beans;
 
+import com.sun.jdo.spi.persistence.support.sqlstore.sco.ArrayList;
 import dev.customExceptions.CustomerNotFoundException;
 import dev.customExceptions.OrderNotFoundException;
 import dev.entities.CustomerEntity;
@@ -12,6 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless(name = "orderEJB")
 public class OrderBean {
@@ -66,6 +68,11 @@ public class OrderBean {
             throw new OrderNotFoundException();
         }
         em.remove(order);
+    }
+
+    public List<OrderEntity> getAllOrders() {
+        List<OrderEntity> orderEntities = em.createQuery("select o from OrderEntity o",OrderEntity.class).getResultList();
+        return orderEntities;
     }
 
     public void produceOrderMessage(OrderEntity order) throws NamingException, JMSException {
