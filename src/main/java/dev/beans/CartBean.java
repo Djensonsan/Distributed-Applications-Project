@@ -1,6 +1,6 @@
 package dev.beans;
 
-import dev.entities.ItemEntity;
+import dev.DTOs.ItemDTO;
 import dev.interceptors.activeCartInterceptor;
 import dev.interfaces.Cart;
 
@@ -21,10 +21,10 @@ public class CartBean implements Cart {
     @PersistenceContext(unitName = "DAPersistenceUnit")
     private EntityManager em;
     private Double total = 0.0;
-    private List products = new ArrayList<ItemEntity>();
+    private List products = new ArrayList<ItemDTO>();
 
     @Override
-    public void addProductToCart(ItemEntity product) {
+    public void addProductToCart(ItemDTO product) {
         products.add(product);
         total += product.getPrice();
     }

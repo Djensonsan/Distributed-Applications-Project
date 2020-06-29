@@ -39,6 +39,7 @@ public class ShoppingCartServlet extends HttpServlet {
         Cart cartBean = (Cart) request.getSession().getAttribute(CART_SESSION_KEY);
         boolean fail = false;
 
+        // Create CartBean if none found
         if (cartBean == null) {
             // EJB is not yet in the HTTP session
             // This means that the client just sent his first request

@@ -1,6 +1,6 @@
 package dev.interfaces;
 
-import dev.entities.ItemEntity;
+import dev.DTOs.ItemDTO;
 
 import javax.ejb.Local;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 @Local
 public interface Cart {
 
-    void addProductToCart(ItemEntity product);
+    void addProductToCart(ItemDTO product);
 
     void checkOut();
 
