@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
-@Path("customer")
+@Path("customers")
 @Stateless
 public class CustomerRestService {
 
@@ -23,31 +23,7 @@ public class CustomerRestService {
     @EJB
     private CustomerBean customerBean;
 
-    @GET
-    @Path("/get/{customerId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getCustomer(@PathParam("customerId") Long customerId) {
-        try {
-            CustomerEntity customer = customerBean.getCustomer(customerId);
-            return Response.ok(customer, MediaType.APPLICATION_JSON).build();
-        } catch (CustomerNotFoundException e) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-    }
-
-    @GET
-    @Path("/getall")
-    public Response getCustomers() {
-        try {
-            List<CustomerEntity> customers = customerBean.getCustomers();
-            return Response.ok(customers).header("Access-Control-Allow-Origin", "*").build();
-        } catch (CustomerNotFoundException e) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-    }
-
     @POST
-    @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response postCustomer(CustomerEntity customer) {
@@ -65,8 +41,30 @@ public class CustomerRestService {
         return Response.ok(persistedCustomer, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").build();
     }
 
+    @GET
+    @Path("/{customerId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCustomer(@PathParam("customerId") Long customerId) {
+        try {
+            CustomerEntity customer = customerBean.getCustomer(customerId);
+            return Response.ok(customer, MediaType.APPLICATION_JSON).build();
+        } catch (CustomerNotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+    @GET
+    @Path("/getAll")
+    public Response getCustomers() {
+        try {
+            List<CustomerEntity> customers = customerBean.getCustomers();
+            return Response.ok(customers).header("Access-Control-Allow-Origin", "*").build();
+        } catch (CustomerNotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
     @PUT
-    @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateCustomer(CustomerEntity customer) {
         if (customer == null || customer.getCustomerId() == null) {
@@ -81,7 +79,7 @@ public class CustomerRestService {
     }
 
     @DELETE
-    @Path("/delete/{customerId}")
+    @Path("/{customerId}")
     public Response deleteCustomer(@PathParam("customerId") Long customerId) {
         try {
             customerBean.deleteCustomer(customerId);

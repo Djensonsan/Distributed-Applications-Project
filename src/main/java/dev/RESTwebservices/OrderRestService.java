@@ -24,7 +24,7 @@ public class OrderRestService {
     private OrderBean orderBean;
 
     @GET
-    @Path("/get/{orderId}")
+    @Path("/{orderId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOrder(@PathParam("orderId") Long orderId) {
         try {
@@ -36,7 +36,7 @@ public class OrderRestService {
     }
 
     @POST
-    @Path("/add/{customerId}")
+    @Path("/{customerId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response postOrder(@PathParam("customerId") Long customerId, OrderEntity order) {
@@ -55,7 +55,7 @@ public class OrderRestService {
     }
 
     @DELETE
-    @Path("/delete/{orderId}")
+    @Path("/{orderId}")
     public Response deleteOrder(@PathParam("orderId") Long orderId) {
         try {
             orderBean.deleteOrder(orderId);
@@ -66,7 +66,6 @@ public class OrderRestService {
     }
 
     @PUT
-    @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateOrder(OrderEntity order) {

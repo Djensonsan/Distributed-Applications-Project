@@ -47,7 +47,7 @@ public class ImageRestService {
     }
 
     @GET
-    @Path("/get/{imageName}")
+    @Path("/{imageName}")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response getImage(@PathParam("imageName") String imageName) {
         try {
@@ -60,7 +60,7 @@ public class ImageRestService {
     }
 
     @DELETE
-    @Path("/delete/{imageName}")
+    @Path("/{imageName}")
     public Response deleteImage(@PathParam("imageName") String imageName){
         try {
             displayBean.deleteImage(imageName);

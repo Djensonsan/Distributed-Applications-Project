@@ -25,12 +25,14 @@ public class ItemRestService {
     ItemBean itemBean;
 
     @POST
-    @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addItem(ItemEntity itemEntity){
+        if(itemEntity == null){
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
         itemBean.addItem(itemEntity);
-        return Response.ok().build();
+        return Response.ok(itemEntity, MediaType.APPLICATION_JSON).build();
     }
 
     @POST
@@ -38,7 +40,7 @@ public class ItemRestService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addImageToItem(@PathParam("imageName") String imageName, @PathParam("itemId") Long itemId){
         try{
-            itemBean.addImageToItem(itemId,imageName);
+            itemBean.addImageToItem(itemId, imageName);
             return Response.ok().build();
         } catch (ItemNotFoundException e){
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -48,7 +50,7 @@ public class ItemRestService {
     }
 
     @GET
-    @Path("/get/{itemId}")
+    @Path("/{itemId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getItem(@PathParam("itemId") Long itemId){
         try {
@@ -77,5 +79,16 @@ public class ItemRestService {
     public Response getAllItems(){
         ArrayList <ItemDTO> itemDTOs = itemBean.getAllItems();
         return Response.ok(itemDTOs, MediaType.APPLICATION_JSON).build();
+    }
+
+    @DELETE
+    @Path("/{itemId}")
+    public Response deleteItem(@PathParam("itemId") Long itemId){
+        try {
+            itemBean.deleteItem(itemId);
+            return Response.ok().build();
+        } catch (ItemNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 }
