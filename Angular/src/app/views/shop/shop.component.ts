@@ -40,4 +40,20 @@ export class ShopComponent implements OnInit {
       });
   }
 
+  checkout(id) {
+    if (this.shoppingcart.length > 0 && id != null) {
+      console.log('sending checkout' + id);
+      this.http.get<any>('http://localhost:8080/DA_Project/ShoppingCartServlet?checkout=' + id)
+        .subscribe(response => {
+          console.log(response);
+          this.shoppingcart = response;
+        });
+      alert('Order Submitted!');
+    } else if (id != null) {
+      alert('Please enter a Customer ID.');
+    } else {
+      alert('Please put items in your shoppingcart before checkout.');
+    }
+  }
+
 }
