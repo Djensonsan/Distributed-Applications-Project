@@ -79,6 +79,17 @@ public class ItemBean {
         return ItemDTOS;
     }
 
+    public ItemDTO getItemDTO (Long itemId){
+        ItemEntity itemEntity = em.find(ItemEntity.class,itemId);
+        ArrayList<String> imageUrls = new ArrayList<>();
+        for (ItemDisplayEntity display:itemEntity.getItemDisplays()) {
+            String url = "http://localhost:8080/DA_Project/images/"+display.getImageName();
+            imageUrls.add(url);
+        }
+        ItemDTO itemDTO = new ItemDTO(itemEntity.getItemId(),itemEntity.getName(),itemEntity.getDescription(),itemEntity.getStockQuantity(),itemEntity.getQuantityUnit(),itemEntity.getPrice(), imageUrls);
+        return itemDTO;
+    }
+
     public void deleteItem(Long itemId) throws ItemNotFoundException{
         ItemEntity itemEntity = em.find(ItemEntity.class, itemId);
         if (itemEntity == null){
