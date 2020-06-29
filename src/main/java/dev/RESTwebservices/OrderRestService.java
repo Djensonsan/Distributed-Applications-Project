@@ -1,4 +1,4 @@
-package dev.webservices;
+package dev.RESTwebservices;
 
 import dev.beans.OrderBean;
 import dev.customExceptions.CustomerNotFoundException;

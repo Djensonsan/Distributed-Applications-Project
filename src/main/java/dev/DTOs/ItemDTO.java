@@ -1,4 +1,4 @@
-package dev.entities;
+package dev.DTOs;
 
 import javax.persistence.Column;
 import java.util.ArrayList;

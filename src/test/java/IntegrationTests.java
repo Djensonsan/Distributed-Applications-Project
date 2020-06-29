@@ -1,3 +1,4 @@
+import dev.SOAPwebservices.OrderSoapService;
 import dev.embeddables.AddressEmbeddable;
 import dev.embeddables.PersonEmbeddable;
 import dev.entities.CustomerEntity;
@@ -109,5 +110,12 @@ public class IntegrationTests {
         OrderEntity order = new OrderEntity();
         Response response = target.path("order/update").request().buildPut(Entity.entity(order, MediaType.APPLICATION_JSON)).invoke();
         assertEquals(Response.Status.BAD_REQUEST, response.getStatusInfo().toEnum());
+    }
+
+    @Test
+    public void testSOAP(){
+        OrderSoapService orderSoapService = new OrderSoapService();
+        String hello = orderSoapService.Sayhello();
+        assertEquals(hello,"Hello");
     }
 }

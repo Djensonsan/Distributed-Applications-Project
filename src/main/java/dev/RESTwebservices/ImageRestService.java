@@ -1,4 +1,4 @@
-package dev.webservices;
+package dev.RESTwebservices;
 
 import dev.beans.DisplayBean;
 import dev.customExceptions.ItemDisplayAlreadyExistsException;
@@ -9,8 +9,6 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;

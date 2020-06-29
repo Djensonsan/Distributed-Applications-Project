@@ -1,9 +1,9 @@
-package dev.webservices;
+package dev.RESTwebservices;
 
 import dev.beans.ItemBean;
 import dev.customExceptions.ItemDisplayNotFoundException;
 import dev.customExceptions.ItemNotFoundException;
-import dev.entities.ItemDTO;
+import dev.DTOs.ItemDTO;
 import dev.entities.ItemEntity;
 
 import javax.ejb.EJB;

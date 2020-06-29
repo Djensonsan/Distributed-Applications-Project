@@ -4,7 +4,7 @@ import dev.customExceptions.ItemDisplayNotFoundException;
 import dev.customExceptions.ItemNotFoundException;
 import dev.entities.ItemDisplayEntity;
 import dev.entities.ItemEntity;
-import dev.entities.ItemDTO;
+import dev.DTOs.ItemDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
