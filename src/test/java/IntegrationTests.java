@@ -1,5 +1,4 @@
-import dev.DTOs.ItemDTO;
-import dev.SOAPwebservices.OrderSoapService;
+import dev.SOAPwebservices.QuoteSoapService;
 import dev.embeddables.AddressEmbeddable;
 import dev.embeddables.PersonEmbeddable;
 import dev.entities.CustomerEntity;
@@ -16,8 +15,7 @@ import javax.ws.rs.core.Response;
 
 import static com.shazam.shazamcrest.MatcherAssert.assertThat;
 import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class IntegrationTests {
     Client client = ClientBuilder.newClient();
@@ -164,8 +162,8 @@ public class IntegrationTests {
     // SOAP Service
     @Test
     public void SOAPTest(){
-        OrderSoapService orderSoapService = new OrderSoapService();
-        String hello = orderSoapService.Sayhello();
-        assertEquals(hello,"Hello");
+        QuoteSoapService quoteSoapService = new QuoteSoapService();
+        String spreuk = quoteSoapService.getSpreuk();
+        assertNotNull(spreuk);
     }
 }
