@@ -1,1 +1,28 @@
 <app-navbar></app-navbar>
+<div class="card">
+  <div class="card-header">
+    Orders
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Date</th>
+        <th scope="col">Order</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of orders; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{ order.requiredDateEnd }}
+        </td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.orderedItems }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

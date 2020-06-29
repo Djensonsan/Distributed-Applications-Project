@@ -30,11 +30,11 @@ public class AuthServlet extends HttpServlet {
 
         if (userAuthenticated) {
             json = Json.createObjectBuilder()
-                    .add("succes", true)
+                    .add("success", true)
                     .build();
         } else {
             json = Json.createObjectBuilder()
-                    .add("succes", false)
+                    .add("success", false)
                     .build();
         }
 

@@ -16,7 +16,6 @@ export class AuthService {
 
   setLoggedIn(arg0: boolean) {
     this.isLoggedIn = arg0;
-    throw new Error('Method not implemented.');
   }
 
   getLoggedIn() {

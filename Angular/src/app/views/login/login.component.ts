@@ -24,8 +24,10 @@ export class LoginComponent implements OnInit {
     this.auth.getUserDetails(username, password).subscribe(data => {
       console.log(data);
       if (data.success) {
+        this.auth.setLoggedIn(true);
         this.router.navigate(['order']);
       } else {
+        this.auth.setLoggedIn(false);
         alert('Wrong Credentials');
       }
     });
