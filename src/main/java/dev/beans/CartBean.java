@@ -3,6 +3,7 @@ package dev.beans;
 import dev.DTOs.ItemDTO;
 import dev.customExceptions.CustomerNotFoundException;
 import dev.customExceptions.ItemNotFoundException;
+import dev.embeddables.AddressEmbeddable;
 import dev.entities.OrderEntity;
 import dev.entities.OrderItemEntity;
 import dev.interceptors.activeCartInterceptor;
@@ -20,6 +21,8 @@ import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Stateful(name = "CartBean")
@@ -43,6 +46,7 @@ public class CartBean implements Cart {
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void checkOut(long customerID) {
+
         OrderEntity orderEntity = new OrderEntity();
         List<OrderItemEntity> orderItemEntities = new ArrayList<OrderItemEntity>();
         for (ItemDTO itemdto : products) {
@@ -54,12 +58,15 @@ public class CartBean implements Cart {
                 e.printStackTrace();
             }
         }
-        orderEntity.setOrderedItems(orderItemEntities);
+
+        // This code would normally be part of the Frontend.
+        Date today = Calendar.getInstance().getTime();
+        orderEntity.setRequiredDateEnd(today);
+
         try {
             orderBean.addOrderToCustomer(orderEntity, customerID);
             products.clear();
             total = 0.0;
-            em.persist(orderEntity);
         } catch (CustomerNotFoundException e) {
             e.printStackTrace();
         } catch (JMSException e) {

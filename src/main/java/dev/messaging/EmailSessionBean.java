@@ -36,8 +36,7 @@ public class EmailSessionBean {
             MimeBodyPart mailMessage = new MimeBodyPart();
 
             mailMessage.setContent(
-                    "Dear "+customer.getPerson().getFirstname()+", thank you for using Grocy! <br /> <br />  We have received your order and will start working on it soon. <br /> Your order will be delivered to: "+order.getAddress().getAddress1()+", "+order
-                            .getAddress().getAddress2()+", "+order.getAddress().getCity()+"<br /> You will receive your order before: "+order.getRequiredDateEnd()+"<br /> <br />  For any updates on your order, please visit our website Grocy.be. <br /> <br /> Have a nice day! <br /> - The Grocy Team", "text/html; charset=utf-8");
+                    "Dear "+customer.getPerson().getFirstname()+", thank you for using Grocy! <br /> <br />  We have received your order and will start working on it soon. <br /> Your order will be delivered to: "+customer.getAddress().getAddress1()+", "+customer.getAddress().getAddress2()+", "+customer.getAddress().getCity()+"<br /> You will receive your order before: "+order.getRequiredDateEnd()+"<br /> <br />  For any updates on your order, please visit our website Grocy.be. <br /> <br /> Have a nice day! <br /> - The Grocy Team", "text/html; charset=utf-8");
 
             mailContent.addBodyPart(mailMessage);
             simpleMail.setContent(mailContent);
@@ -82,8 +81,8 @@ public class EmailSessionBean {
             MimeBodyPart mailMessage = new MimeBodyPart();
 
             mailMessage.setContent(
-                    "Dear "+customer.getPerson().getFirstname()+", this is a reminder that your order will be delivered soon! <br /> <br /> Your order will be delivered to: "+order.getAddress().getAddress1()+", "+order
-                            .getAddress().getAddress2()+", "+order.getAddress().getCity()+"<br /> You will receive your order before: "+order.getRequiredDateEnd()+"<br /> <br />  For any updates on your order, please visit our website Grocy.be. <br /> <br /> Have a nice day! <br /> - The Grocy Team", "text/html; charset=utf-8");
+                    "Dear "+customer.getPerson().getFirstname()+", this is a reminder that your order will be delivered soon! <br /> <br /> Your order will be delivered to: "+customer.getAddress().getAddress1()+", "+customer
+                            .getAddress().getAddress2()+", "+customer.getAddress().getCity()+"<br /> You will receive your order before: "+order.getRequiredDateEnd()+"<br /> <br />  For any updates on your order, please visit our website Grocy.be. <br /> <br /> Have a nice day! <br /> - The Grocy Team", "text/html; charset=utf-8");
 
             mailContent.addBodyPart(mailMessage);
             simpleMail.setContent(mailContent);

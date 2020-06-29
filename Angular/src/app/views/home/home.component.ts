@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
   private client;
 
   constructor(private http: HttpClient, private soap: NgxSoapService) {
-    // 1. get wsdl content
     this.soap.createClient('assets/quote.wsdl')
       .then(client => {
         console.log('Client', client);
@@ -23,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   getQuote() {
-    this.client.call('getSpreuk').subscribe(res => {
+    this.client.call('getSpreuk',null).subscribe(res => {
       console.log(res);
     }, err => console.log(err));
   }
