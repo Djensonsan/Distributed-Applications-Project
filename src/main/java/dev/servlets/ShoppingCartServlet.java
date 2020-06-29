@@ -6,7 +6,6 @@ import dev.beans.ItemBean;
 import dev.customExceptions.ItemNotFoundException;
 import dev.entities.ItemEntity;
 import dev.interfaces.Cart;
-import org.json.JSONArray;
 
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+
 
 
 @WebServlet(name = "shoppingCartServlet", urlPatterns = "/ShoppingCartServlet")
@@ -39,19 +38,7 @@ public class ShoppingCartServlet extends HttpServlet {
 
         System.out.println("Hello from servlet");
         Cart cartBean = (Cart) request.getSession().getAttribute(CART_SESSION_KEY);
-
-//        // Authentication
-//        String email = request.getParameter("email");
-//        String password = request.getParameter("password");
-//
-//        System.out.println(email + " " + password);
-//        Boolean userAuthenticated = customerBean.authenticateCustomer(email, password);
-//
-//        if (!userAuthenticated) {
-//            System.out.println("User doesn't exist!");
-//        } else {
-//            System.out.println("User exists, please continue!");
-//        }
+        boolean fail = false;
 
         if (cartBean == null) {
             // EJB is not yet in the HTTP session
@@ -64,8 +51,8 @@ public class ShoppingCartServlet extends HttpServlet {
                 request.getSession().setAttribute(CART_SESSION_KEY, cartBean);
 
                 System.out.println("shoppingCart created");
-
             } catch (NamingException e) {
+                fail = true;
                 throw new ServletException(e);
             }
         } else {
@@ -79,18 +66,10 @@ public class ShoppingCartServlet extends HttpServlet {
                 ItemEntity itemEntity = itemBean.getItem(Long.parseLong(productId));
                 cartBean.addProductToCart(itemEntity);
                 System.out.println("product " + itemEntity.getName() + " added");
-
-                List<ItemEntity> shoppingcart = cartBean.getProducts();
-                JSONArray jsonArray = new JSONArray(shoppingcart);
-                PrintWriter out = response.getWriter();
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.setStatus(200);
-                out.print(jsonArray.toString());
-                out.flush();
             } catch (ItemNotFoundException e) {
                 System.out.println("ERROR: Failed to Add Product " + e);
                 response.sendError(400);
+                fail = true;
             }
         }
 
@@ -108,6 +87,15 @@ public class ShoppingCartServlet extends HttpServlet {
             // Request instructs to complete the purchase
             cartBean.delete();
             System.out.println("Shopping cart was deleted");
+        }
+
+        if (cartBean != null && fail == false) {
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.setStatus(200);
+            out.print(cartBean.getJSON());
+            out.flush();
         }
     }
 
