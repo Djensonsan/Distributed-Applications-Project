@@ -41,7 +41,8 @@ export class ShopComponent implements OnInit {
   }
 
   checkout(id) {
-    if (this.shoppingcart.length > 0 && id != null) {
+    console.log(this.shoppingcart[0].total > 0);
+    if (this.shoppingcart[0].total > 0 && id) {
       console.log('sending checkout' + id);
       this.http.get<any>('http://localhost:8080/DA_Project/ShoppingCartServlet?checkout=' + id)
         .subscribe(response => {
@@ -49,10 +50,10 @@ export class ShopComponent implements OnInit {
           this.shoppingcart = response;
         });
       alert('Order Submitted!');
-    } else if (id != null) {
-      alert('Please enter a Customer ID.');
+    } else if (id) {
+      alert('Please put items in your shoppingcart before Checkout.');
     } else {
-      alert('Please put items in your shoppingcart before checkout.');
+      alert('Please enter a Customer ID.');
     }
   }
 
