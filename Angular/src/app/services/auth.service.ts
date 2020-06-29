@@ -27,6 +27,6 @@ export class AuthService {
     // TODO: Get details from API
     const params = new HttpParams().set('email', username).set('password', password);
     console.log(params);
-    return this.http.post<MyData>('/api/auth', {params});
+    return this.http.post<MyData>('http://localhost:8080/DA_Project/auth', {params});
   }
 }

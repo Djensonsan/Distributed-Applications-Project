@@ -1,9 +1,10 @@
 package dev.servlets;
 
-import com.google.gson.JsonObject;
 import dev.beans.CustomerBean;
 
 import javax.ejb.EJB;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,13 +26,16 @@ public class AuthServlet extends HttpServlet {
         System.out.println(email + " " + password);
         Boolean userAuthenticated = customerBean.authenticateCustomer(email, password);
 
-        //create Json Object
-        JsonObject json = new JsonObject();
+        JsonObject json;
 
         if (userAuthenticated) {
-            json.addProperty("succes", true);
+            json = Json.createObjectBuilder()
+                    .add("succes", true)
+                    .build();
         } else {
-            json.addProperty("succes", false);
+            json = Json.createObjectBuilder()
+                    .add("succes", false)
+                    .build();
         }
 
         PrintWriter out = response.getWriter();
