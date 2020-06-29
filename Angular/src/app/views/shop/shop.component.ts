@@ -33,7 +33,8 @@ export class ShopComponent implements OnInit {
   }
 
   delete() {
-    this.http.get<any>('http://localhost:8080/DA_Project/ShoppingCartServlet?delete=yes')
+    console.log('sending delete');
+    this.http.get<any>('http://localhost:8080/DA_Project/ShoppingCartServlet?delete=true')
       .subscribe(response => {
         this.shoppingcart = response;
       });

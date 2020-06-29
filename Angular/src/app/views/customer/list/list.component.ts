@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<any>('http://localhost:8080/DA_Project/customer/getall')
+    this.http.get<any>('http://localhost:8080/DA_Project/customers/getAll')
       .subscribe(response => {
         this.posts = response;
         console.log(response);

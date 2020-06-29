@@ -5,7 +5,6 @@ import dev.DTOs.ItemDTO;
 import dev.beans.CustomerBean;
 import dev.beans.ItemBean;
 import dev.customExceptions.ItemNotFoundException;
-import dev.entities.ItemEntity;
 import dev.interfaces.Cart;
 
 import javax.ejb.EJB;
@@ -84,7 +83,7 @@ public class ShoppingCartServlet extends HttpServlet {
 
         //Delete
         String delete = request.getParameter("delete");
-        if (checkout != null && checkout.equalsIgnoreCase("yes")) {
+        if (delete != null && delete.equals("true")) {
             // Request instructs to complete the purchase
             cartBean.delete();
             System.out.println("Shopping cart was deleted");

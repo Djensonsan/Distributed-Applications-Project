@@ -7,7 +7,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class PostService {
   public stateChange: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private url = 'http://localhost:8080/DA_Project/customer/add';
+  private url = 'http://localhost:8080/DA_Project/customers';
 
   constructor(private http: HttpClient) {
   }
