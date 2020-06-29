@@ -15,11 +15,11 @@ ng serve --proxy-config proxyconfig.json
 
 ## Screenshot
 
-![Home](https://gitlab.groept.be/distributed/dist-20-16/-/blob/master/MainScreen.png)
+![Home](https://i.imgur.com/SVPvD19.png)
 
 ## ER-Diagram
 
-![ER-Diagram](https://gitlab.groept.be/distributed/dist-20-16/-/blob/master/ER-Diagram.png)
+![ER-Diagram](https://i.imgur.com/cVGxoM5.png)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
