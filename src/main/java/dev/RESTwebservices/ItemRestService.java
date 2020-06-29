@@ -78,6 +78,4 @@ public class ItemRestService {
         ArrayList <ItemDTO> itemDTOs = itemBean.getAllItems();
         return Response.ok(itemDTOs, MediaType.APPLICATION_JSON).build();
     }
-
-    // Get All Items -> url images
 }
