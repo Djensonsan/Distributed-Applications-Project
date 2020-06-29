@@ -8,7 +8,6 @@ import dev.DTOs.ItemDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.mail.FetchProfile;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
