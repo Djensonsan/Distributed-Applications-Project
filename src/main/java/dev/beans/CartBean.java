@@ -61,6 +61,7 @@ public class CartBean implements Cart {
         // This code would normally be part of the Frontend.
         Date today = Calendar.getInstance().getTime();
         orderEntity.setRequiredDateEnd(today);
+        orderEntity.setOrderedItems(orderItemEntities);
 
         try {
             orderBean.addOrderToCustomer(orderEntity, customerID);
