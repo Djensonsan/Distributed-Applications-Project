@@ -15,9 +15,10 @@ public class ShoppingCartFilter implements Filter{
         String blockRequest = servletRequest.getParameter("blockTheRequest");
         if(blockRequest == null || blockRequest.equals("false")) {
             filterChain.doFilter(servletRequest, servletResponse);
+        }else {
+            HttpServletResponse response = (HttpServletResponse) servletResponse;
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-        response.sendError(HttpServletResponse.SC_FORBIDDEN);
     }
 
     @Override

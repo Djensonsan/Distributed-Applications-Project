@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgxSoapService} from 'ngx-soap';
-import {HttpClient} from '@angular/common/http';
-
+import {PostService} from '../../services/post.service';
 
 @Component({
   selector: 'app-home',
@@ -10,24 +8,25 @@ import {HttpClient} from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   private client;
+  public quote;
 
-  constructor(private http: HttpClient, private soap: NgxSoapService) {
-    this.soap.createClient('assets/quote.wsdl')
-      .then(client => {
-        console.log('Client', client);
-        this.client = client;
-        this.getQuote();
-      })
-      .catch(err => console.log('Error', err));
+  constructor(private service: PostService) {
   }
 
   getQuote() {
-    this.client.call('getSpreuk',null).subscribe(res => {
-      console.log(res);
-    }, err => console.log(err));
+    this.service.requestSOAP()
+      .subscribe(
+        response => {
+          const wrapper = document.createElement('div');
+          wrapper.innerHTML = response;
+          const element = wrapper.getElementsByTagName('return')[0];
+          this.quote = element.innerHTML;
+        }, error => {
+          console.log(error);
+        });
   }
 
   ngOnInit(): void {
+    this.getQuote();
   }
-
 }

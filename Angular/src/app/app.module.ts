@@ -16,8 +16,6 @@ import {HomeComponent} from './views/home/home.component';
 import {LoginComponent} from './views/login/login.component';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
-import {NgxSoapModule} from 'ngx-soap';
-
 
 @NgModule({
   declarations: [
@@ -36,7 +34,6 @@ import {NgxSoapModule} from 'ngx-soap';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    NgxSoapModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'customer', component: CustomerComponent},

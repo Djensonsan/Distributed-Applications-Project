@@ -67,7 +67,7 @@ public class CartBean implements Cart {
             orderBean.addOrderToCustomer(orderEntity, customerID);
             products.clear();
             total = 0.0;
-            em.persist(orderEntity);
+            //em.persist(orderEntity);
         } catch (CustomerNotFoundException e) {
             e.printStackTrace();
         } catch (JMSException e) {
