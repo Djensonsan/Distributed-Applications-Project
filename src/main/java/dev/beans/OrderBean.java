@@ -1,10 +1,14 @@
 package dev.beans;
 
-import com.sun.jdo.spi.persistence.support.sqlstore.sco.ArrayList;
+import dev.DTOs.ItemDTO;
+import dev.DTOs.OrderDTO;
+import dev.DTOs.OrderItemDTO;
 import dev.customExceptions.CustomerNotFoundException;
+import dev.customExceptions.ItemNotFoundException;
 import dev.customExceptions.OrderNotFoundException;
 import dev.entities.CustomerEntity;
 import dev.entities.OrderEntity;
+import dev.entities.OrderItemEntity;
 
 import javax.ejb.*;
 import javax.jms.*;
@@ -13,6 +17,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless(name = "orderEJB")
@@ -20,6 +25,9 @@ public class OrderBean {
 
     @PersistenceContext(unitName = "DAPersistenceUnit")
     private EntityManager em;
+
+    @EJB
+    ItemBean itemBean;
 
     public OrderBean() {
     }
@@ -70,9 +78,27 @@ public class OrderBean {
         em.remove(order);
     }
 
-    public List<OrderEntity> getAllOrders() {
-        List<OrderEntity> orderEntities = em.createQuery("select o from OrderEntity o",OrderEntity.class).getResultList();
-        return orderEntities;
+//    public List<OrderEntity> getAllOrders() {
+//        List<OrderEntity> orderEntities = em.createQuery("select o from OrderEntity o",OrderEntity.class).getResultList();
+//        return orderEntities;
+//    }
+
+    public ArrayList<OrderDTO> getAllOrders() throws ItemNotFoundException {
+        List<OrderEntity> orderEntities = em.createQuery("select o from OrderEntity o", OrderEntity.class).getResultList();
+        List<OrderItemEntity> orderItemEntities;
+        ArrayList<OrderDTO> orderDTOs = new ArrayList<>();
+        for (OrderEntity orderEntity:orderEntities) {
+            orderItemEntities = orderEntity.getOrderedItems();
+            OrderDTO orderDTO = new OrderDTO(orderEntity.getOrderId(),orderEntity.getAddress(),orderEntity.getOrderDate(),orderEntity.getRequiredDateStart(),orderEntity.getRequiredDateEnd(),orderEntity.getDeliveredDate(),orderEntity.getStatus(),orderEntity.getComment());
+            for (OrderItemEntity orderItemEntity:orderItemEntities) {
+                Long itemId = orderItemEntity.getItem().getItemId();
+                ItemDTO itemDTO = itemBean.getItemDTO(itemId);
+                OrderItemDTO orderItemDTO = new OrderItemDTO(orderItemEntity.getOrderItemId(),orderItemEntity.getQuantity(),orderItemEntity.getComment(),itemDTO);
+                orderDTO.addOrderedItem(orderItemDTO);
+            }
+            orderDTOs.add(orderDTO);
+        }
+        return orderDTOs;
     }
 
     public void produceOrderMessage(OrderEntity order) throws NamingException, JMSException {

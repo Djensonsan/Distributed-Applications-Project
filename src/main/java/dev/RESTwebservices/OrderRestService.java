@@ -1,7 +1,9 @@
 package dev.RESTwebservices;
 
+import dev.DTOs.OrderDTO;
 import dev.beans.OrderBean;
 import dev.customExceptions.CustomerNotFoundException;
+import dev.customExceptions.ItemNotFoundException;
 import dev.customExceptions.OrderNotFoundException;
 import dev.entities.OrderEntity;
 
@@ -41,8 +43,12 @@ public class OrderRestService {
     @Path("/getAll")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllOrder() {
-        List <OrderEntity> orderEntities = orderBean.getAllOrders();
-        return Response.ok(orderEntities, MediaType.APPLICATION_JSON).build();
+        try {
+            List <OrderDTO> orderEntities = orderBean.getAllOrders();
+            return Response.ok(orderEntities, MediaType.APPLICATION_JSON).build();
+        } catch (ItemNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 
     @POST
