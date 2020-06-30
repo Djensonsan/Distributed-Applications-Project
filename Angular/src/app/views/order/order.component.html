@@ -8,22 +8,24 @@
       <thead>
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">Date</th>
-        <th scope="col">Name</th>
+        <th scope="col">Delivery Date</th>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Email</th>
         <th scope="col">Order</th>
       </tr>
       </thead>
-      <tbody>
-      <div *ngFor="let customer of orders;">
-        <tr *ngFor="let order of customer.orders;">
-          <th scope="row">{{order.orderId}}</th>
-          <td>
-            {{ order.requiredDateEnd }}
-          </td>
-          <td>{{ customer.person.firstname }}</td>
-          <td><span *ngFor="let item of order.orderedItems;">{{item}}</span></td>
-        </tr>
-      </div>
+      <tbody *ngFor="let customer of orders;">
+      <tr *ngFor="let order of customer.orders;">
+        <th scope="row">{{order.orderId}}</th>
+        <td>
+          {{ order.requiredDateEnd }}
+        </td>
+        <td>{{ customer.person.firstname }}</td>
+        <td>{{ customer.person.lastname }}</td>
+        <td>{{ customer.person.email }}</td>
+        <td><span *ngFor="let item of order.orderedItems;">{{item.item.name}}, </span></td>
+      </tr>
       </tbody>
     </table>
   </div>
