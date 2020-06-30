@@ -78,11 +78,6 @@ public class OrderBean {
         em.remove(order);
     }
 
-//    public List<OrderEntity> getAllOrders() {
-//        List<OrderEntity> orderEntities = em.createQuery("select o from OrderEntity o",OrderEntity.class).getResultList();
-//        return orderEntities;
-//    }
-
     public ArrayList<OrderDTO> getAllOrders() throws ItemNotFoundException {
         List<OrderEntity> orderEntities = em.createQuery("select o from OrderEntity o", OrderEntity.class).getResultList();
         List<OrderItemEntity> orderItemEntities;

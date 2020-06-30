@@ -1,19 +1,31 @@
 package dev.beans;
 
+import dev.DTOs.CustomerDTO;
+import dev.DTOs.ItemDTO;
+import dev.DTOs.OrderDTO;
+import dev.DTOs.OrderItemDTO;
 import dev.customExceptions.CustomerNotFoundException;
+import dev.customExceptions.ItemNotFoundException;
 import dev.entities.CustomerEntity;
+import dev.entities.OrderEntity;
+import dev.entities.OrderItemEntity;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless(name = "customerEJB")
 public class CustomerBean {
     @PersistenceContext(unitName = "DAPersistenceUnit")
     private EntityManager em;
+
+    @EJB
+    ItemBean itemBean;
 
     public CustomerBean() {
     }
@@ -26,15 +38,27 @@ public class CustomerBean {
         return customer;
     }
 
-    public List <CustomerEntity> getCustomers() throws CustomerNotFoundException {
-        List<CustomerEntity> customerEntities;
-        customerEntities = em
-                .createQuery("Select c from CustomerEntity c", CustomerEntity.class)
-                .getResultList();
-        if (customerEntities.isEmpty()) {
-            throw new CustomerNotFoundException();
+    public List <CustomerDTO> getCustomers() throws CustomerNotFoundException, ItemNotFoundException {
+        List<CustomerEntity> customerEntities = em.createQuery("Select c from CustomerEntity c", CustomerEntity.class).getResultList();
+        List<CustomerDTO> customerDTOs = new ArrayList<>();
+        for (CustomerEntity customerEntity: customerEntities) {
+            CustomerDTO customerDTO = new CustomerDTO(customerEntity.getCustomerId(),customerEntity.getAddress(),customerEntity.getPerson());
+            List<OrderEntity> orderEntities = customerEntity.getOrders();
+            List<OrderItemEntity> orderItemEntities;
+            for (OrderEntity orderEntity:orderEntities) {
+                orderItemEntities = orderEntity.getOrderedItems();
+                OrderDTO orderDTO = new OrderDTO(orderEntity.getOrderId(),orderEntity.getAddress(),orderEntity.getOrderDate(),orderEntity.getRequiredDateStart(),orderEntity.getRequiredDateEnd(),orderEntity.getDeliveredDate(),orderEntity.getStatus(),orderEntity.getComment());
+                for (OrderItemEntity orderItemEntity:orderItemEntities) {
+                    Long itemId = orderItemEntity.getItem().getItemId();
+                    ItemDTO itemDTO = itemBean.getItemDTO(itemId);
+                    OrderItemDTO orderItemDTO = new OrderItemDTO(orderItemEntity.getOrderItemId(),orderItemEntity.getQuantity(),orderItemEntity.getComment(),itemDTO);
+                    orderDTO.addOrderedItem(orderItemDTO);
+                }
+                customerDTO.addOrder(orderDTO);
+            }
+            customerDTOs.add(customerDTO);
         }
-        return customerEntities;
+        return customerDTOs;
     }
 
     public CustomerEntity addCustomer(CustomerEntity customer) {
@@ -65,7 +89,6 @@ public class CustomerBean {
     }
 
     public boolean authenticateCustomer(String email, String password){
-
         Query query = em.createQuery("Select c.customerId FROM CustomerEntity c WHERE c.person.email = :email AND c.person.password = :password");
         query.setParameter("email", email);
         query.setParameter("password", password);

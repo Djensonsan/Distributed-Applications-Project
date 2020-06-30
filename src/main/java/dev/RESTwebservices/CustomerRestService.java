@@ -1,7 +1,9 @@
 package dev.RESTwebservices;
 
+import dev.DTOs.CustomerDTO;
 import dev.beans.CustomerBean;
 import dev.customExceptions.CustomerNotFoundException;
+import dev.customExceptions.ItemNotFoundException;
 import dev.entities.CustomerEntity;
 
 import javax.ejb.EJB;
@@ -57,9 +59,9 @@ public class CustomerRestService {
     @Path("/getAll")
     public Response getCustomers() {
         try {
-            List<CustomerEntity> customers = customerBean.getCustomers();
+            List<CustomerDTO> customers = customerBean.getCustomers();
             return Response.ok(customers).header("Access-Control-Allow-Origin", "*").build();
-        } catch (CustomerNotFoundException e) {
+        } catch (CustomerNotFoundException | ItemNotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
