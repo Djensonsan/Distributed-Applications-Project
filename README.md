@@ -1,6 +1,6 @@
 # Distributed Applications Project
 
-In this demo we will use various Jakarta EE features and consume them through an Angluar front-end. 
+In this demo we will use various Jakarta EE features and consume them through an Angular front-end. 
 The application server used is Payara, the server does require some configuration in order for all functionalities to work.
 An Azure MySQL database was used to store the entities.
 
