@@ -43,7 +43,7 @@ npm install
 ng serve --proxy-config proxyconfig.json
 ```
 
-## Screenshot Landing Page
+## Screenshots
 ![Screenshots](https://imgur.com/HoWXsMC.png)
 ![Screenshots](https://imgur.com/CKOpF4e.png)
 ![Screenshots](https://imgur.com/Tnmq3Ek.png)
@@ -56,10 +56,4 @@ ng serve --proxy-config proxyconfig.json
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 Please make sure to update tests as appropriate.
-
-## License
-[KU Leuven](https://admin.kuleuven.be/sab/jd/en/student-thesis-copyright)
-
-This project was made by: Jens Leysen & August Martens.
