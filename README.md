@@ -1,7 +1,8 @@
-# Distributed Applications Lab
+# Distributed Applications Project
 
-In this demo we will use various Jakarta EE features and consume them through an Angluar front-end.
-
+In this demo we will use various Jakarta EE features and consume them through an Angluar front-end. 
+The application server used is Payara, the server does require some configuration in order for all functionalities to work.
+An Azure MySQL database was used to store the entities.
 
 ## Installation
 
@@ -13,7 +14,7 @@ npm install
 ng serve --proxy-config proxyconfig.json
 ```
 
-## Screenshot
+## Screenshot Landing Page
 
 ![Home](https://i.imgur.com/SVPvD19.png)
 
@@ -28,3 +29,5 @@ Please make sure to update tests as appropriate.
 
 ## License
 [KU Leuven](https://admin.kuleuven.be/sab/jd/en/student-thesis-copyright)
+
+This project was made by: Jens Leysen & August Martens.
