@@ -44,8 +44,10 @@ ng serve --proxy-config proxyconfig.json
 ```
 
 ## Screenshot Landing Page
-![Screenshots] (https://imgur.com/xF3ygDi.png)
-
+![Screenshots](https://imgur.com/KtBrOlx.png)
+![Screenshots](https://imgur.com/QzU4usG.png)
+![Screenshots](https://imgur.com/ZAH6rPp.png)
+![Screenshots](https://imgur.com/xF3ygDi.png)
 
 ## ER-Diagram
 
