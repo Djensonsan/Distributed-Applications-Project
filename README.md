@@ -4,7 +4,7 @@ In this demo we will use various Jakarta EE features and consume them through an
 The application server used is Payara, the server does require some configuration in order for all functionalities to work.
 An Azure MySQL database was used to store the entities. 
 
-This project was part of the course "Distributed Applications", taught at Campus GroepT, KU Leuven.
+This project was part of the course "Distributed Applications" taught at Campus GroepT, KU Leuven.
 
 ## Application Idea
 The idea of this project was to make a custom e-commerce webshop in Jakarta EE with an Angular Frontend. The following requirements had to be implemented:
@@ -44,10 +44,11 @@ ng serve --proxy-config proxyconfig.json
 ```
 
 ## Screenshot Landing Page
-![Screenshots](https://imgur.com/KtBrOlx.png)
-![Screenshots](https://imgur.com/QzU4usG.png)
-![Screenshots](https://imgur.com/ZAH6rPp.png)
-![Screenshots](https://imgur.com/xF3ygDi.png)
+![Screenshots](https://imgur.com/HoWXsMC.png)
+![Screenshots](https://imgur.com/CKOpF4e.png)
+![Screenshots](https://imgur.com/Tnmq3Ek.png)
+![Screenshots](https://imgur.com/JpWiAr2.png)
+![Screenshots](https://imgur.com/6FDxLbW.png)
 
 ## ER-Diagram
 
