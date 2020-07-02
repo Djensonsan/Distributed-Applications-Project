@@ -8,7 +8,6 @@ This project was part of the course "Distributed Applications", taught at Campus
 
 ## Application Idea
 The idea of this project was to make a custom e-commerce webshop in Jakarta EE with an Angular Frontend. The following requirements had to be implemented:
-Develop a small application, that includes the following components:
 
 EJB:
 - At least one stateless and one stateful EJB session bean
