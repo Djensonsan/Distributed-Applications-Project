@@ -21,11 +21,7 @@ EJB:
 JPA:
 - A few entity beans, with at least a one-to-many and a many-to-many relationship
 - Corresponding tables
-- Some "special" JPA annotations (make a selection yourself)
-  @Enumerated
-  @Elementcollection
-  @Inheritance
-  @Embeddable/@Embedded
+- Some "special" JPA annotations:@Enumerated, @Elementcollection, @Inheritance, @Embeddable/@Embedded
 - Web-client
 - One Servlet
 - One Filter
