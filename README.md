@@ -6,7 +6,7 @@ An Azure MySQL database was used to store the entities.
 
 This project was part of the course "Distributed Applications" taught at Campus GroepT, KU Leuven.
 
-## Application Idea
+## Requirements
 The idea of this project was to make a custom e-commerce webshop in Jakarta EE with an Angular Frontend. The following requirements had to be implemented:
 
 EJB:
@@ -35,7 +35,7 @@ Framework:
 
 ## Installation
 
-In order to run the application, first start the Glassfish server.
+In order to run the application, start the Glassfish server (configuration will not be discussed).
 Then, run the following commands to start the Angular CLI.
 
 ```bash
